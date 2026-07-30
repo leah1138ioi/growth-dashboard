@@ -230,6 +230,17 @@ blockquote{border-left:3px solid var(--accent-dust-light);padding:8px 16px;margi
 .mode-btn:hover{border-color:var(--accent-rose);color:var(--accent-rose)}
 .mode-btn.selected{border-color:var(--accent-rose);background:var(--accent-rose-bg);color:var(--accent-rose)}
 .mode-btn .mode-hint{display:block;font-size:.7rem;font-weight:400;color:var(--text-muted);margin-top:2px}
+/* Day tabs */
+.day-tab{padding:8px 16px;border-radius:var(--radius-sm);border:1px solid var(--border-light);background:var(--bg-card);cursor:pointer;font-size:.82rem;font-weight:600;color:var(--text-muted);transition:all .15s;font-family:var(--font-sans)}
+.day-tab:hover{border-color:var(--accent-sage);color:var(--accent-sage)}
+.day-tab.selected{background:var(--accent-sage-bg);border-color:var(--accent-sage);color:var(--accent-sage)}
+.day-panel{display:none}
+.day-panel.active{display:block}
+/* Weekend tabs */
+.weekend-tab{padding:8px 16px;border-radius:var(--radius-sm);border:1px solid var(--border-light);background:var(--bg-card);cursor:pointer;font-size:.82rem;font-weight:600;color:var(--text-muted);transition:all .15s;font-family:var(--font-sans)}
+.weekend-tab:hover{border-color:var(--accent-sky);color:var(--accent-sky)}
+.weekend-tab.selected{background:var(--accent-sky-bg);border-color:var(--accent-sky);color:var(--accent-sky)}
+
 
 /* Toast */
 .toast{
@@ -315,6 +326,7 @@ blockquote{border-left:3px solid var(--accent-dust-light);padding:8px 16px;margi
   <div class="sidebar-divider"></div>
   <div class="sidebar-tip">
     <strong>💡 核心原则</strong><br>
+    7天逐日固定日程，按天执行不纠结；<br>
     任务宁少但高价值；<br>
     计划允许失败，靠容错兜底；<br>
     不做情绪记录，只看事实与产出。
@@ -566,123 +578,283 @@ blockquote{border-left:3px solid var(--accent-dust-light);padding:8px 16px;margi
   <div class="time-block"><span class="time">22:30</span><span class="task-name">睡觉</span></div>
 </div>
 
-<!-- 模式一 -->
+<!-- 模式一 · 工作日完整版 -->
 <div class="schedule-mode" id="modeFull" style="border-left:3px solid var(--accent-sage)">
   <div class="mode-title">📋 模式一 · 工作日完整版 <span class="mode-badge full">状态正常</span></div>
 
-  <h4>① 今日3只高价值青蛙</h4>
-  <div class="frog-list" id="frogListFull">
-    <div class="frog-card"><div class="frog-num">🐸1</div><div class="frog-info"><div class="frog-label" contenteditable="true">_________</div><div class="frog-meta">所属：技能/求职/Shopify　|　验收产出：<span contenteditable="true">_________</span></div></div></div>
-    <div class="frog-card"><div class="frog-num">🐸2</div><div class="frog-info"><div class="frog-label" contenteditable="true">_________</div><div class="frog-meta">所属：<span contenteditable="true">___</span>　|　验收产出：<span contenteditable="true">_________</span></div></div></div>
-    <div class="frog-card"><div class="frog-num">🐸3</div><div class="frog-info"><div class="frog-label" contenteditable="true">_________</div><div class="frog-meta">所属：<span contenteditable="true">___</span>　|　验收产出：<span contenteditable="true">_________</span></div></div></div>
+  <!-- 工作日 tab 切换栏 -->
+  <div style="display:flex;gap:4px;margin-bottom:16px;flex-wrap:wrap" class="weekday-tabs">
+    <button class="day-tab selected" onclick="switchDay('mon')">周一</button>
+    <button class="day-tab" onclick="switchDay('tue')">周二</button>
+    <button class="day-tab" onclick="switchDay('wed')">周三</button>
+    <button class="day-tab" onclick="switchDay('thu')">周四</button>
+    <button class="day-tab" onclick="switchDay('fri')">周五</button>
   </div>
 
-  <h4 style="margin-top:20px">② 下午时段任务排布（每块40-60分钟）</h4>
-  <div class="time-block"><span class="time">12:30 — 13:00</span><span class="task-name">日程确认 + 快速看昨日遗留</span><span class="task-duration">30min</span><span class="task-output">今日待办清单</span></div>
-  <div class="time-block"><span class="time">13:00 — 14:00</span><span class="task-name">🐸1 高价值青蛙任务</span><span class="task-duration">60min</span><span class="task-output" contenteditable="true">_________</span></div>
-  <div class="time-block rest"><span class="time">14:00 — 14:15</span><span class="task-name">☕ 休息</span><span class="task-duration">15min</span></div>
-  <div class="time-block"><span class="time">14:15 — 15:00</span><span class="task-name">🐸2 高价值青蛙任务</span><span class="task-duration">45min</span><span class="task-output" contenteditable="true">_________</span></div>
-  <div class="time-block"><span class="time">15:00 — 15:30</span><span class="task-name">🇬🇧 英语 · 词汇积累（Anki 30词）</span><span class="task-duration">30min</span><span class="task-output">卡组截图</span></div>
-  <div class="time-block"><span class="time">15:30 — 16:15</span><span class="task-name">🐸3 高价值青蛙任务</span><span class="task-duration">45min</span><span class="task-output" contenteditable="true">_________</span></div>
-  <div class="time-block rest"><span class="time">16:15 — 16:30</span><span class="task-name">☕ 休息 / 碎片中断缓冲</span><span class="task-duration">15min</span></div>
-  <div class="time-block"><span class="time">16:30 — 17:15</span><span class="task-name">🇬🇧 英语 · 阅读 / 书面输出</span><span class="task-duration">45min</span><span class="task-output">1篇笔记或3条短句</span></div>
-  <div class="time-block"><span class="time">17:15 — 18:00</span><span class="task-name">Shopify轻任务（Reels/优化/竞品）</span><span class="task-duration">45min</span><span class="task-output" contenteditable="true">_________</span></div>
-  <div class="time-block rest"><span class="time">18:00 — 19:30</span><span class="task-name">晚饭 + 休息</span><span class="task-duration">90min</span></div>
-  <div class="time-block"><span class="time">19:30 — 20:00</span><span class="task-name">🇬🇧 英语 · 面试句式背诵录音</span><span class="task-duration">30min</span><span class="task-output">1段录音</span></div>
-  <div class="time-block"><span class="time">20:00 — 21:00</span><span class="task-name">求职任务（简历/投递/调研，按需）</span><span class="task-duration">60min</span><span class="task-output" contenteditable="true">_________</span></div>
-  <div class="time-block rest"><span class="time">21:00 — 22:00</span><span class="task-name">缓冲 / 碎片中断补位 / 轻度整理</span><span class="task-duration">60min</span></div>
-  <div class="time-block"><span class="time">22:00 — 22:30</span><span class="task-name">次日日程预排 + 收尾</span><span class="task-duration">30min</span><span class="task-output">明日青蛙清单</span></div>
+  <!-- === 周一 === -->
+  <div class="day-panel active" id="panel-mon">
+    <h4>① 今日3只高价值青蛙</h4>
+    <div class="frog-list">
+      <div class="frog-card"><div class="frog-num">🐸1</div><div class="frog-info"><div class="frog-label">Ins宠物画POD竞品调研</div><div class="frog-meta">Shopify · 产出：竞品文档（3优点+2可借鉴点）</div></div></div>
+      <div class="frog-card"><div class="frog-num">🐸2</div><div class="frog-info"><div class="frog-label">外企面试高频问答抄写5题+职场词汇</div><div class="frog-meta">英语 · 产出：5题问答笔记+词汇清单</div></div></div>
+      <div class="frog-card"><div class="frog-num">🐸3</div><div class="frog-info"><div class="frog-label">岗位调研：跨境运营助理/单证专员/外贸助理</div><div class="frog-meta">求职 · 产出：岗位要求清单+自身缺失技能标记</div></div></div>
+    </div>
 
-  <h4 style="margin-top:20px">③ 英语学习任务（工作日约2h15min）</h4>
-  <div class="table-wrap"><table>
-    <thead><tr><th>子任务</th><th>时长</th><th>产出</th></tr></thead>
-    <tbody>
-      <tr><td>词汇积累（Anki）</td><td>30min</td><td>≥30张卡</td></tr>
-      <tr><td>阅读（JD/产品描述精读）</td><td>30min</td><td>1篇笔记（含生词）</td></tr>
-      <tr><td>书面短句输出</td><td>15min</td><td>3条仿写</td></tr>
-      <tr><td>面试常用句式背诵+录音</td><td>30min</td><td>1段录音</td></tr>
-    </tbody>
-  </table></div>
+    <h4 style="margin-top:20px">② 下午+晚间任务排布</h4>
+    <div class="time-block"><span class="time">13:00 — 14:00</span><span class="task-name">🐸1 Shopify：Ins宠物画POD竞品调研</span><span class="task-duration">60min</span><span class="task-output">文档：3竞品优点+2可借鉴点</span></div>
+    <div class="time-block"><span class="time">14:10 — 15:10</span><span class="task-name">🐸2 英语：外企面试高频问答抄写5题，记忆职场岗位词汇</span><span class="task-duration">60min</span><span class="task-output">5题问答笔记+词汇清单</span></div>
+    <div class="time-block"><span class="time">15:20 — 16:20</span><span class="task-name">🐸3 求职调研：整理岗位关键词，记录岗位要求，标记自身缺失技能</span><span class="task-duration">60min</span><span class="task-output">岗位要求清单+技能差距标记</span></div>
+    <div class="time-block"><span class="time">16:30 — 17:20</span><span class="task-name">技能学习：跨境独立站课程片段学习，产出2条书面笔记</span><span class="task-duration">50min</span><span class="task-output">2条书面笔记</span></div>
+    <div class="time-block"><span class="time">17:20 — 18:00</span><span class="task-name">轻复盘：记录完成/未完成，写下明天第一件优先任务</span><span class="task-duration">40min</span><span class="task-output">复盘记录+明日优先任务</span></div>
+    <div class="time-block rest"><span class="time">18:00 — 19:30</span><span class="task-name">晚饭 + 休息</span><span class="task-duration">90min</span></div>
+    <div class="time-block"><span class="time">19:30 — 20:20</span><span class="task-name">Shopify：优化1个宠物画产品详情页，输出修改后版本</span><span class="task-duration">50min</span><span class="task-output">修改后产品详情页</span></div>
+    <div class="time-block"><span class="time">20:30 — 21:20</span><span class="task-name">英语：外贸外企短篇阅读，摘抄可用句式</span><span class="task-duration">50min</span><span class="task-output">摘抄句式笔记</span></div>
+    <div class="time-block"><span class="time">21:20 — 21:40</span><span class="task-name">预览次日任务</span><span class="task-duration">20min</span><span class="task-output">明日任务清单</span></div>
 
-  <h4 style="margin-top:20px">④ 今日可以舍弃的琐事清单</h4>
-  <blockquote>自问：这件事不做会怎样？不会怎样→划掉。</blockquote>
-  <div class="checklist-item" id="trivialFull1"><div class="check-box" onclick="this.classList.toggle('checked')"></div><div><span contenteditable="true">_________</span><span class="reason">（可舍弃理由：<span contenteditable="true">_________</span>）</span></div></div>
-  <div class="checklist-item" id="trivialFull2"><div class="check-box" onclick="this.classList.toggle('checked')"></div><div><span contenteditable="true">_________</span><span class="reason">（可舍弃理由：<span contenteditable="true">_________</span>）</span></div></div>
-  <div class="checklist-item" id="trivialFull3"><div class="check-box" onclick="this.classList.toggle('checked')"></div><div><span contenteditable="true">_________</span><span class="reason">（可舍弃理由：<span contenteditable="true">_________</span>）</span></div></div>
+    <h4 style="margin-top:20px">③ 今日产出验收标准</h4>
+    <div class="table-wrap"><table>
+      <thead><tr><th>产出物</th><th>是否完成</th></tr></thead>
+      <tbody>
+        <tr><td>竞品调研文档（3个竞品优点+2个可借鉴点）</td><td contenteditable="true">⬜</td></tr>
+        <tr><td>外企面试问答5题笔记+职场词汇清单</td><td contenteditable="true">⬜</td></tr>
+        <tr><td>岗位关键词清单+自身缺失技能标记</td><td contenteditable="true">⬜</td></tr>
+        <tr><td>跨境独立站课程笔记（≥2条）</td><td contenteditable="true">⬜</td></tr>
+        <tr><td>轻复盘记录+明日第一优先任务</td><td contenteditable="true">⬜</td></tr>
+        <tr><td>产品详情页修改版本</td><td contenteditable="true">⬜</td></tr>
+        <tr><td>英语阅读摘抄句式笔记</td><td contenteditable="true">⬜</td></tr>
+      </tbody>
+    </table></div>
+  </div>
 
-  <h4 style="margin-top:20px">⑤ 今日产出验收标准</h4>
-  <blockquote>今天做完要留下什么实实在在的结果？（不能只是"浏览/学习/看了"）</blockquote>
-  <div class="table-wrap"><table>
-    <thead><tr><th>产出物</th><th>是否完成</th></tr></thead>
-    <tbody>
-      <tr><td contenteditable="true">_________</td><td contenteditable="true">⬜</td></tr>
-      <tr><td contenteditable="true">_________</td><td contenteditable="true">⬜</td></tr>
-      <tr><td contenteditable="true">_________</td><td contenteditable="true">⬜</td></tr>
-    </tbody>
-  </table></div>
+  <!-- === 周二 === -->
+  <div class="day-panel" id="panel-tue">
+    <h4>① 今日3只高价值青蛙</h4>
+    <div class="frog-list">
+      <div class="frog-card"><div class="frog-num">🐸1</div><div class="frog-info"><div class="frog-label">撰写1条Ins Reels完整脚本文本</div><div class="frog-meta">Shopify · 产出：Reels脚本文档</div></div></div>
+      <div class="frog-card"><div class="frog-num">🐸2</div><div class="frog-info"><div class="frog-label">复习周一面试问答+新增5组商务读写句型</div><div class="frog-meta">英语 · 产出：复习记录+5组新句型</div></div></div>
+      <div class="frog-card"><div class="frog-num">🐸3</div><div class="frog-info"><div class="frog-label">迭代一版简历，匹配筛选出的岗位要求</div><div class="frog-meta">求职 · 产出：简历V2版本+匹配记录</div></div></div>
+    </div>
+
+    <h4 style="margin-top:20px">② 下午+晚间任务排布</h4>
+    <div class="time-block"><span class="time">13:00 — 14:00</span><span class="task-name">🐸1 Shopify：撰写1条Ins Reels完整脚本文本</span><span class="task-duration">60min</span><span class="task-output">Reels脚本文档</span></div>
+    <div class="time-block"><span class="time">14:10 — 15:10</span><span class="task-name">🐸2 英语：复习周一面试问答，新增5组商务读写句型</span><span class="task-duration">60min</span><span class="task-output">复习记录+5组新句型</span></div>
+    <div class="time-block"><span class="time">15:20 — 16:20</span><span class="task-name">🐸3 求职：迭代一版简历，匹配筛选出的岗位要求</span><span class="task-duration">60min</span><span class="task-output">简历V2+匹配记录</span></div>
+    <div class="time-block"><span class="time">16:30 — 17:20</span><span class="task-name">技能学习：POD模式知识点，输出书面笔记</span><span class="task-duration">50min</span><span class="task-output">POD知识点笔记</span></div>
+    <div class="time-block"><span class="time">17:20 — 18:00</span><span class="task-name">轻复盘：记录完成/未完成，写下明天第一件优先任务</span><span class="task-duration">40min</span><span class="task-output">复盘记录+明日优先任务</span></div>
+    <div class="time-block rest"><span class="time">18:00 — 19:30</span><span class="task-name">晚饭 + 休息</span><span class="task-duration">90min</span></div>
+    <div class="time-block"><span class="time">19:30 — 20:20</span><span class="task-name">Shopify：检查店铺页面bug与排版</span><span class="task-duration">50min</span><span class="task-output">bug清单+修复记录</span></div>
+    <div class="time-block"><span class="time">20:30 — 21:20</span><span class="task-name">英语：写一小段模拟面试自我介绍短文</span><span class="task-duration">50min</span><span class="task-output">自我介绍短文</span></div>
+    <div class="time-block"><span class="time">21:20 — 21:40</span><span class="task-name">预览次日任务</span><span class="task-duration">20min</span><span class="task-output">明日任务清单</span></div>
+
+    <h4 style="margin-top:20px">③ 今日产出验收标准</h4>
+    <div class="table-wrap"><table>
+      <thead><tr><th>产出物</th><th>是否完成</th></tr></thead>
+      <tbody>
+        <tr><td>Ins Reels脚本文档（1条完整）</td><td contenteditable="true">⬜</td></tr>
+        <tr><td>面试问答复习+5组商务句型</td><td contenteditable="true">⬜</td></tr>
+        <tr><td>简历V2版本+岗位匹配记录</td><td contenteditable="true">⬜</td></tr>
+        <tr><td>POD模式书面笔记</td><td contenteditable="true">⬜</td></tr>
+        <tr><td>轻复盘记录+明日第一优先任务</td><td contenteditable="true">⬜</td></tr>
+        <tr><td>店铺bug检查清单+修复记录</td><td contenteditable="true">⬜</td></tr>
+        <tr><td>面试自我介绍短文</td><td contenteditable="true">⬜</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <!-- === 周三 === -->
+  <div class="day-panel" id="panel-wed">
+    <h4>① 今日3只高价值青蛙</h4>
+    <div class="frog-list">
+      <div class="frog-card"><div class="frog-num">🐸1</div><div class="frog-info"><div class="frog-label">基于周二脚本，剪出Reels半成品草稿并导出</div><div class="frog-meta">Shopify · 产出：Reels半成品视频文件</div></div></div>
+      <div class="frog-card"><div class="frog-num">🐸2</div><div class="frog-info"><div class="frog-label">面试情景模拟，口头作答可录音</div><div class="frog-meta">英语 · 产出：模拟录音+自评</div></div></div>
+      <div class="frog-card"><div class="frog-num">🐸3</div><div class="frog-info"><div class="frog-label">筛选5个符合"有成长不过劳非销售"岗位</div><div class="frog-meta">求职 · 产出：岗位清单表格</div></div></div>
+    </div>
+
+    <h4 style="margin-top:20px">② 下午+晚间任务排布</h4>
+    <div class="time-block"><span class="time">13:00 — 14:00</span><span class="task-name">🐸1 Shopify：基于周二脚本，剪出Reels半成品草稿并导出</span><span class="task-duration">60min</span><span class="task-output">Reels半成品视频</span></div>
+    <div class="time-block"><span class="time">14:10 — 15:10</span><span class="task-name">🐸2 英语：面试情景模拟，口头作答可录音</span><span class="task-duration">60min</span><span class="task-output">模拟录音+自评</span></div>
+    <div class="time-block"><span class="time">15:20 — 16:20</span><span class="task-name">🐸3 求职：筛选5个符合"有成长不过度劳累非销售"岗位，输出岗位清单表格</span><span class="task-duration">60min</span><span class="task-output">岗位清单表格</span></div>
+    <div class="time-block"><span class="time">16:30 — 17:20</span><span class="task-name">技能学习：学习独立站产品文案写作要点，记笔记</span><span class="task-duration">50min</span><span class="task-output">文案写作笔记</span></div>
+    <div class="time-block"><span class="time">17:20 — 18:00</span><span class="task-name">轻复盘：记录完成/未完成，写下明天第一件优先任务</span><span class="task-duration">40min</span><span class="task-output">复盘记录+明日优先任务</span></div>
+    <div class="time-block rest"><span class="time">18:00 — 19:30</span><span class="task-name">晚饭 + 休息</span><span class="task-duration">90min</span></div>
+    <div class="time-block"><span class="time">19:30 — 20:20</span><span class="task-name">Shopify：优化店铺首页局部模块</span><span class="task-duration">50min</span><span class="task-output">首页模块优化截图</span></div>
+    <div class="time-block"><span class="time">20:30 — 21:20</span><span class="task-name">英语阅读：积累描述个人能力英文句子</span><span class="task-duration">50min</span><span class="task-output">能力描述句式笔记</span></div>
+    <div class="time-block"><span class="time">21:20 — 21:40</span><span class="task-name">预览次日任务</span><span class="task-duration">20min</span><span class="task-output">明日任务清单</span></div>
+
+    <h4 style="margin-top:20px">③ 今日产出验收标准</h4>
+    <div class="table-wrap"><table>
+      <thead><tr><th>产出物</th><th>是否完成</th></tr></thead>
+      <tbody>
+        <tr><td>Reels半成品草稿视频</td><td contenteditable="true">⬜</td></tr>
+        <tr><td>面试情景模拟录音+自评</td><td contenteditable="true">⬜</td></tr>
+        <tr><td>5个岗位清单表格</td><td contenteditable="true">⬜</td></tr>
+        <tr><td>产品文案写作笔记</td><td contenteditable="true">⬜</td></tr>
+        <tr><td>轻复盘记录+明日第一优先任务</td><td contenteditable="true">⬜</td></tr>
+        <tr><td>首页模块优化截图</td><td contenteditable="true">⬜</td></tr>
+        <tr><td>能力描述英文句式笔记</td><td contenteditable="true">⬜</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <!-- === 周四 === -->
+  <div class="day-panel" id="panel-thu">
+    <h4>① 今日3只高价值青蛙</h4>
+    <div class="frog-list">
+      <div class="frog-card"><div class="frog-num">🐸1</div><div class="frog-info"><div class="frog-label">构思2个宠物画新产品变体想法</div><div class="frog-meta">Shopify · 产出：2个产品变体构思文档</div></div></div>
+      <div class="frog-card"><div class="frog-num">🐸2</div><div class="frog-info"><div class="frog-label">复习本周单词、问答，查漏补缺</div><div class="frog-meta">英语 · 产出：本周英语复习清单</div></div></div>
+      <div class="frog-card"><div class="frog-num">🐸3</div><div class="frog-info"><div class="frog-label">最多投递2个优质筛选岗位</div><div class="frog-meta">求职 · 产出：投递台账更新</div></div></div>
+    </div>
+
+    <h4 style="margin-top:20px">② 下午+晚间任务排布</h4>
+    <div class="time-block"><span class="time">13:00 — 14:00</span><span class="task-name">🐸1 Shopify：构思2个宠物画新产品变体想法，写入文档</span><span class="task-duration">60min</span><span class="task-output">2个产品变体构思文档</span></div>
+    <div class="time-block"><span class="time">14:10 — 15:10</span><span class="task-name">🐸2 英语：复习本周单词、问答，查漏补缺</span><span class="task-duration">60min</span><span class="task-output">复习清单+薄弱点标记</span></div>
+    <div class="time-block"><span class="time">15:20 — 16:20</span><span class="task-name">🐸3 求职：最多投递2个优质筛选岗位，更新求职投递台账</span><span class="task-duration">60min</span><span class="task-output">投递台账更新</span></div>
+    <div class="time-block"><span class="time">16:30 — 17:20</span><span class="task-name">技能学习：Ins免费自然流量方法，记录2个可执行点</span><span class="task-duration">50min</span><span class="task-output">2个可执行点笔记</span></div>
+    <div class="time-block"><span class="time">17:20 — 18:00</span><span class="task-name">轻复盘：记录完成/未完成，写下明天第一件优先任务</span><span class="task-duration">40min</span><span class="task-output">复盘记录+明日优先任务</span></div>
+    <div class="time-block rest"><span class="time">18:00 — 19:30</span><span class="task-name">晚饭 + 休息</span><span class="task-duration">90min</span></div>
+    <div class="time-block"><span class="time">19:30 — 20:20</span><span class="task-name">Shopify：完善Reels视频并发布</span><span class="task-duration">50min</span><span class="task-output">发布链接+截图</span></div>
+    <div class="time-block"><span class="time">20:30 — 21:20</span><span class="task-name">英语：仿写一小段Shopify产品英文描述</span><span class="task-duration">50min</span><span class="task-output">产品英文描述仿写</span></div>
+    <div class="time-block"><span class="time">21:20 — 21:40</span><span class="task-name">预览次日任务</span><span class="task-duration">20min</span><span class="task-output">明日任务清单</span></div>
+
+    <h4 style="margin-top:20px">③ 今日产出验收标准</h4>
+    <div class="table-wrap"><table>
+      <thead><tr><th>产出物</th><th>是否完成</th></tr></thead>
+      <tbody>
+        <tr><td>2个产品变体构思文档</td><td contenteditable="true">⬜</td></tr>
+        <tr><td>本周英语复习清单+薄弱点</td><td contenteditable="true">⬜</td></tr>
+        <tr><td>投递台账更新（最多2个）</td><td contenteditable="true">⬜</td></tr>
+        <tr><td>Ins免费流量2个可执行点笔记</td><td contenteditable="true">⬜</td></tr>
+        <tr><td>轻复盘记录+明日第一优先任务</td><td contenteditable="true">⬜</td></tr>
+        <tr><td>Reels发布链接+截图</td><td contenteditable="true">⬜</td></tr>
+        <tr><td>Shopify产品英文描述仿写</td><td contenteditable="true">⬜</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <!-- === 周五 === -->
+  <div class="day-panel" id="panel-fri">
+    <h4>① 今日3只高价值青蛙</h4>
+    <div class="frog-list">
+      <div class="frog-card"><div class="frog-num">🐸1</div><div class="frog-info"><div class="frog-label">复盘本周店铺与Reels自然浏览数据</div><div class="frog-meta">Shopify · 产出：3条数据观察（不纠结订单）</div></div></div>
+      <div class="frog-card"><div class="frog-num">🐸2</div><div class="frog-info"><div class="frog-label">本周英语总复习，整理不会的句子与单词</div><div class="frog-meta">英语 · 产出：英语复习总清单</div></div></div>
+      <div class="frog-card"><div class="frog-num">🐸3</div><div class="frog-info"><div class="frog-label">更新求职台账+周中小结：标记本周无产出事项</div><div class="frog-meta">求职+复盘 · 产出：台账更新+无效事项清单</div></div></div>
+    </div>
+
+    <h4 style="margin-top:20px">② 下午+晚间任务排布</h4>
+    <div class="time-block"><span class="time">13:00 — 14:00</span><span class="task-name">🐸1 Shopify：复盘本周店铺与Reels自然浏览数据，写下3条观察，不纠结订单</span><span class="task-duration">60min</span><span class="task-output">3条数据观察文档</span></div>
+    <div class="time-block"><span class="time">14:10 — 15:10</span><span class="task-name">🐸2 英语：本周英语总复习，整理不会的句子与单词</span><span class="task-duration">60min</span><span class="task-output">本周英语复习总清单</span></div>
+    <div class="time-block"><span class="time">15:20 — 16:20</span><span class="task-name">🐸3 求职：更新求职台账，整理面试问题清单</span><span class="task-duration">60min</span><span class="task-output">台账更新+面试问题清单</span></div>
+    <div class="time-block"><span class="time">16:30 — 17:20</span><span class="task-name">自由补强：三选一补短板（英语 / Shopify店铺 / 简历）</span><span class="task-duration">50min</span><span class="task-output">补强内容笔记</span></div>
+    <div class="time-block"><span class="time">17:20 — 18:00</span><span class="task-name">周中小结：写下本周忙碌但无产出事项，标记下周要砍掉</span><span class="task-duration">40min</span><span class="task-output">无效事项清单+下周砍掉标记</span></div>
+    <div class="time-block rest"><span class="time">18:00 — 19:30</span><span class="task-name">晚饭 + 休息</span><span class="task-duration">90min</span></div>
+    <div class="time-block"><span class="time">19:30 — 20:30</span><span class="task-name">低压力休闲浏览行业信息，不安排高强度任务</span><span class="task-duration">60min</span><span class="task-output">—</span></div>
+    <div class="time-block"><span class="time">20:30 — 21:40</span><span class="task-name">规划周末少量任务</span><span class="task-duration">70min</span><span class="task-output">周末任务清单</span></div>
+
+    <h4 style="margin-top:20px">③ 今日产出验收标准</h4>
+    <div class="table-wrap"><table>
+      <thead><tr><th>产出物</th><th>是否完成</th></tr></thead>
+      <tbody>
+        <tr><td>本周店铺数据3条观察文档</td><td contenteditable="true">⬜</td></tr>
+        <tr><td>本周英语复习总清单（不会的词/句）</td><td contenteditable="true">⬜</td></tr>
+        <tr><td>求职台账更新+面试问题清单</td><td contenteditable="true">⬜</td></tr>
+        <tr><td>补强内容笔记（三选一）</td><td contenteditable="true">⬜</td></tr>
+        <tr><td>周中小结：无效事项清单+下周砍掉标记</td><td contenteditable="true">⬜</td></tr>
+        <tr><td>周末任务清单</td><td contenteditable="true">⬜</td></tr>
+      </tbody>
+    </table></div>
+  </div>
 </div>
 
-<!-- 模式二 -->
+<!-- 模式二 · 工作日最低容错版 -->
 <div class="schedule-mode" id="modeMin" style="display:none;border-left:3px solid var(--accent-lavender)">
   <div class="mode-title">📋 模式二 · 工作日最低容错版 <span class="mode-badge min">状态差 / 只保底线</span></div>
-  <blockquote>启用条件：身体疲惫/情绪低落/家事打断/没睡好。<strong>不内疚，只保底线。</strong></blockquote>
+  <blockquote>启用条件：身体疲惫/情绪低落/家事打断/没睡好。<strong>不内疚，只保底线。其余全部搁置休息，不补任务。</strong></blockquote>
 
-  <h4>① 今日青蛙（容错版只保1只）</h4>
-  <div class="frog-list">
-    <div class="frog-card" style="border:1px solid var(--accent-lavender-light)">
-      <div class="frog-num">🐸1</div>
-      <div class="frog-info">
-        <div class="frog-label" contenteditable="true">_________（唯一必做）</div>
-        <div class="frog-meta">验收产出：<span contenteditable="true">_________</span></div>
-      </div>
-      <span class="badge badge-must">必做</span>
-    </div>
-  </div>
+  <h4>🔴 最低容错版：只做3项，其余全部放弃</h4>
 
-  <h4 style="margin-top:20px">② 下午最小任务排布</h4>
-  <div class="time-block rest"><span class="time">12:30 — 13:30</span><span class="task-name">休息 + 缓冲</span><span class="task-duration">60min</span></div>
-  <div class="time-block"><span class="time">13:30 — 14:30</span><span class="task-name">🐸1 唯一必做任务</span><span class="task-duration">60min</span></div>
-  <div class="time-block"><span class="time">14:30 — 15:00</span><span class="task-name">🇬🇧 英语 · 仅词汇Anki（底线）</span><span class="task-duration">30min</span></div>
-  <div class="time-block rest"><span class="time">15:00 — 22:00</span><span class="task-name">自由休息 / 处理杂事 / 早睡</span></div>
+  <div class="time-block"><span class="time">任意时间</span><span class="task-name"><strong>1. 英语40分钟</strong>：只复习旧内容不学新内容</span><span class="task-duration">40min</span><span class="task-output">复习记录</span></div>
+  <div class="time-block"><span class="time">任意时间</span><span class="task-name"><strong>2. Shopify 30分钟简单任务</strong>：修改一处文字 或 构思选题，二选一</span><span class="task-duration">30min</span><span class="task-output">改动记录或选题笔记</span></div>
+  <div class="time-block"><span class="time">任意时间</span><span class="task-name"><strong>3. 15分钟记录</strong>：记下今日需要规避的无效事项，避免明天重复瞎忙</span><span class="task-duration">15min</span><span class="task-output">无效事项记录</span></div>
 
-  <blockquote style="margin-top:16px">💡 容错版设计目的：避免"状态差→完不成→自责→更不想做"的恶性循环。<strong>完成1件就是胜利。</strong></blockquote>
+  <blockquote style="margin-top:16px">💡 容错版设计目的：避免"状态差→完不成→自责→更不想做"的恶性循环。<strong>完成这3项就是胜利。连续两天启用最低容错版代表负荷过高，需要下调任务总量。</strong></blockquote>
 </div>
 
-<!-- 模式三 -->
+<!-- 模式三 · 周末聚会容错版 -->
 <div class="schedule-mode" id="modeWeekend" style="display:none;border-left:3px solid var(--accent-sky)">
   <div class="mode-title">📋 模式三 · 周末聚会容错版 <span class="mode-badge weekend">周六日 · 任务减半</span></div>
   <blockquote>允许朋友聚会，任务量减半，不强制完成全部。</blockquote>
 
-  <h4>① 今日青蛙（周末只排2只，轻量）</h4>
-  <div class="frog-list">
-    <div class="frog-card"><div class="frog-num">🐸1</div><div class="frog-info"><div class="frog-label" contenteditable="true">_________（建议：周复盘 或 1条Reels）</div><div class="frog-meta">验收产出：<span contenteditable="true">_________</span></div></div></div>
-    <div class="frog-card"><div class="frog-num">🐸2</div><div class="frog-info"><div class="frog-label" contenteditable="true">_________（建议：英语阅读1篇）</div><div class="frog-meta">验收产出：<span contenteditable="true">_________</span></div></div></div>
+  <!-- 周末 tab 切换栏 -->
+  <div style="display:flex;gap:4px;margin-bottom:16px;flex-wrap:wrap" class="weekend-tabs">
+    <button class="weekend-tab selected" onclick="switchWeekendDay('sat')">周六</button>
+    <button class="weekend-tab" onclick="switchWeekendDay('sun')">周日</button>
   </div>
 
-  <h4 style="margin-top:20px">② 下午任务排布</h4>
-  <div class="time-block rest"><span class="time">12:30 — 14:00</span><span class="task-name">午饭 + 休息</span><span class="task-duration">90min</span></div>
-  <div class="time-block"><span class="time">14:00 — 15:00</span><span class="task-name">🐸1</span><span class="task-duration">60min</span></div>
-  <div class="time-block"><span class="time">15:00 — 15:30</span><span class="task-name">🇬🇧 英语 · 阅读1篇（周末减半）</span><span class="task-duration">30min</span></div>
-  <div class="time-block"><span class="time">15:30 — 16:00</span><span class="task-name">🐸2</span><span class="task-duration">30min</span></div>
-  <div class="time-block rest"><span class="time">16:00 之后</span><span class="task-name">聚会 / 休息 / 自由时间</span></div>
+  <!-- 周六 -->
+  <div class="day-panel active" id="panel-sat">
+    <h4>① 今日青蛙（周末轻量2只）</h4>
+    <div class="frog-list">
+      <div class="frog-card"><div class="frog-num">🐸1</div><div class="frog-info"><div class="frog-label">英语40分钟：复习本周单词+短篇阅读</div><div class="frog-meta">产出：复习记录+阅读笔记</div></div></div>
+      <div class="frog-card"><div class="frog-num">🐸2</div><div class="frog-info"><div class="frog-label">Shopify：构思下周2条Reels选题写入文档</div><div class="frog-meta">产出：2条Reels选题文档</div></div></div>
+    </div>
+
+    <h4 style="margin-top:20px">② 下午任务排布</h4>
+    <div class="time-block rest"><span class="time">12:30 — 13:00</span><span class="task-name">午饭休息</span><span class="task-duration">30min</span></div>
+    <div class="time-block"><span class="time">13:00 — 13:40</span><span class="task-name">🐸1 英语40分钟：复习本周单词+短篇阅读</span><span class="task-duration">40min</span><span class="task-output">复习记录+阅读笔记</span></div>
+    <div class="time-block"><span class="time">13:50 — 14:50</span><span class="task-name">🐸2 Shopify：构思下周2条Reels选题写入文档</span><span class="task-duration">60min</span><span class="task-output">2条Reels选题文档</span></div>
+    <div class="time-block rest"><span class="time">15:00 之后</span><span class="task-name">自由时间 / 聚会 / 休息</span></div>
+
+    <blockquote style="margin-top:12px">⚠️ 求职：仅可随意浏览招聘信息，<strong>禁止改简历、禁止投递。</strong></blockquote>
+
+    <h4 style="margin-top:20px">③ 产出验收标准</h4>
+    <div class="table-wrap"><table>
+      <thead><tr><th>产出物</th><th>是否完成</th></tr></thead>
+      <tbody>
+        <tr><td>本周单词复习记录+短篇阅读笔记</td><td contenteditable="true">⬜</td></tr>
+        <tr><td>下周2条Reels选题文档</td><td contenteditable="true">⬜</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <!-- 周日 -->
+  <div class="day-panel" id="panel-sun">
+    <h4>① 今日青蛙（周日轻量2只）</h4>
+    <div class="frog-list">
+      <div class="frog-card"><div class="frog-num">🐸1</div><div class="frog-info"><div class="frog-label">英语40分钟：面试自我介绍口语练习</div><div class="frog-meta">产出：口语练习录音</div></div></div>
+      <div class="frog-card"><div class="frog-num">🐸2</div><div class="frog-info"><div class="frog-label">执行工作台标准周复盘</div><div class="frog-meta">产出：周复盘文档</div></div></div>
+    </div>
+
+    <h4 style="margin-top:20px">② 下午任务排布</h4>
+    <div class="time-block rest"><span class="time">12:30 — 13:00</span><span class="task-name">午饭休息</span><span class="task-duration">30min</span></div>
+    <div class="time-block"><span class="time">13:00 — 13:40</span><span class="task-name">🐸1 英语40分钟：面试自我介绍口语练习</span><span class="task-duration">40min</span><span class="task-output">口语练习录音</span></div>
+    <div class="time-block"><span class="time">13:50 — 14:50</span><span class="task-name">🐸2 执行工作台标准周复盘：①列出本周忙却无产出的事；②评估技能提升/求职/Shopify三者的收益与精力消耗；③写下下一周最多4条核心目标</span><span class="task-duration">60min</span><span class="task-output">周复盘文档</span></div>
+    <div class="time-block rest"><span class="time">15:00 之后</span><span class="task-name">自由时间 / 休息</span></div>
+
+    <h4 style="margin-top:20px">③ 产出验收标准</h4>
+    <div class="table-wrap"><table>
+      <thead><tr><th>产出物</th><th>是否完成</th></tr></thead>
+      <tbody>
+        <tr><td>面试自我介绍口语练习录音</td><td contenteditable="true">⬜</td></tr>
+        <tr><td>周复盘文档（无效事项+三项评估+下周4条目标）</td><td contenteditable="true">⬜</td></tr>
+      </tbody>
+    </table></div>
+  </div>
 </div>
 
-<!-- 日程生成规则 -->
+<!-- 调用规则 -->
 <div class="card lavender" style="margin-top:20px">
-  <h3>🔄 每日日程生成规则</h3>
+  <h3>📋 7天逐日日程 · 调用规则</h3>
   <ol style="font-size:.85rem;padding-left:20px;color:var(--text-secondary);display:flex;flex-direction:column;gap:6px">
-    <li><strong>判断模式：</strong>状态好→完整版；状态差→最低容错版；周末→聚会容错版。</li>
-    <li><strong>从板块2本周核心目标中抽取3只青蛙，</strong>确保青蛙对应本周任务，不是临时琐事。</li>
-    <li><strong>从板块3项目看板中拉取具体行动，</strong>填入下午时段。</li>
-    <li><strong>英语任务自动填入</strong>（完整版4项/容错版1项/周末1项）。</li>
-    <li><strong>产出验收标准必须具体到可见物</strong>（文档/截图/录音/链接），否则任务无效。</li>
+    <li><strong>每日指令示例：</strong>"读取工作台，执行今日日程，今天是周一，状态正常" / "今天是周三，启用最低容错版" / "今天是周六，周末聚会容错版"</li>
+    <li><strong>碎片化中断：</strong>遇到出门买东西、丢垃圾、琐事打断，任务没做完不要熬夜补，<strong>直接跳过，不产生负罪感。</strong></li>
+    <li><strong>评判标准：</strong>完成度看「是否完成动作产出」，<strong>不看订单、面试结果。</strong>产出物是唯一衡量标准。</li>
+    <li><strong>连续两天启用最低容错版</strong>代表负荷过高，需要下调任务总量，下周砍掉1-2条核心目标。</li>
+    <li><strong>每周日强制运行周复盘</strong>（板块5），删除无效忙碌事项，解决忙而无结果的问题。</li>
     <li><strong>上午9-11点、11-12:30永远不排任务。</strong></li>
-    <li><strong>单任务不超过60分钟，</strong>超长任务拆分。</li>
+    <li><strong>单任务不超过60分钟，</strong>超长任务已拆分。</li>
   </ol>
 </div>
 </section>
-
-<div class="section-divider"></div>
 
 <!-- ========== 板块5 ========== -->
 <section id="p5">
@@ -780,8 +952,8 @@ function updateSaveStatus(m){var e=document.getElementById('saveStatus');if(e)e.
 document.addEventListener('input',function(e){if(e.target.isContentEditable){autoSave();updateSaveStatus('编辑中...')}});
 document.addEventListener('click',function(e){if(e.target.classList.contains('check-box'))autoSave()});
 var currentMode='full';
-function selectMode(mode,silent){currentMode=mode;document.getElementById('modeFull').style.display='none';document.getElementById('modeMin').style.display='none';document.getElementById('modeWeekend').style.display='none';if(mode==='full')document.getElementById('modeFull').style.display='';else if(mode==='min')document.getElementById('modeMin').style.display='';else if(mode==='weekend')document.getElementById('modeWeekend').style.display='';document.querySelectorAll('.mode-btn').forEach(function(b,i){b.classList.remove('selected');if(i===0&&mode==='full')b.classList.add('selected');if(i===1&&mode==='min')b.classList.add('selected');if(i===2&&mode==='weekend')b.classList.add('selected')});if(!silent){autoSave();showToast('已切换至：'+(mode==='full'?'工作日完整版':mode==='min'?'最低容错版':'周末聚会版'))}}
-function generateTodaySchedule(){var n=new Date(),d=n.getDay(),w=(d===0||d===6);if(w)selectMode('weekend');else selectMode('full');document.getElementById('p4').scrollIntoView({behavior:'smooth'});var dn=['周日','周一','周二','周三','周四','周五','周六'],ts=dn[d];document.getElementById('todayName').textContent=ts;var h=document.getElementById('modeHint');if(w)h.innerHTML='<strong>🏖️ 周末模式已激活：</strong>今天是'+ts+'，任务减半，允许聚会。已自动切换至周末聚会容错版。';else h.innerHTML='<strong>📋 工作日模式：</strong>今天是'+ts+'，默认使用完整版。如状态不佳请手动切换至最低容错版。';var th=document.getElementById('todayHint');if(w)th.textContent='🏖️ 今天是'+ts+'，周末任务减半，记得放松！';else th.textContent='📋 今天是'+ts+'，工作日加油！状态差可切换最低容错版。';var ds=n.getFullYear()+'年'+(n.getMonth()+1)+'月'+n.getDate()+'日 '+ts;document.getElementById('headerDate').innerHTML=ds;autoSave();showToast('✅ 今日日程已生成 — '+(w?'周末聚会版':'工作日完整版'))}
+function selectMode(mode,silent){currentMode=mode;document.getElementById('modeFull').style.display='none';document.getElementById('modeMin').style.display='none';document.getElementById('modeWeekend').style.display='none';if(mode==='full'){document.getElementById('modeFull').style.display='';switchDay('mon')}else if(mode==='min')document.getElementById('modeMin').style.display='';else if(mode==='weekend'){document.getElementById('modeWeekend').style.display='';switchWeekendDay('sat')}document.querySelectorAll('.mode-btn').forEach(function(b,i){b.classList.remove('selected');if(i===0&&mode==='full')b.classList.add('selected');if(i===1&&mode==='min')b.classList.add('selected');if(i===2&&mode==='weekend')b.classList.add('selected')});if(!silent){autoSave();showToast('已切换至：'+(mode==='full'?'工作日完整版':mode==='min'?'最低容错版':'周末聚会版'))}}
+function generateTodaySchedule(){var n=new Date(),d=n.getDay(),w=(d===0||d===6);var dayMap={1:'mon',2:'tue',3:'wed',4:'thu',5:'fri',6:'sat',0:'sun'};if(w){selectMode('weekend');switchWeekendDay(dayMap[d])}else{selectMode('full');switchDay(dayMap[d])}document.getElementById('p4').scrollIntoView({behavior:'smooth'});var dn=['周日','周一','周二','周三','周四','周五','周六'],ts=dn[d];document.getElementById('todayName').textContent=ts;var h=document.getElementById('modeHint');if(w)h.innerHTML='<strong>🏖️ 周末模式已激活：</strong>今天是'+ts+'，任务减半，允许聚会。已自动切换至周末聚会容错版。';else h.innerHTML='<strong>📋 工作日模式：</strong>今天是'+ts+'，默认使用完整版。如状态不佳请手动切换至最低容错版。';var th=document.getElementById('todayHint');if(w)th.textContent='🏖️ 今天是'+ts+'，周末任务减半，记得放松！';else th.textContent='📋 今天是'+ts+'，工作日加油！状态差可切换最低容错版。';var ds=n.getFullYear()+'年'+(n.getMonth()+1)+'月'+n.getDate()+'日 '+ts;document.getElementById('headerDate').innerHTML=ds;autoSave();showToast('✅ 今日日程已生成 — '+(w?'周末聚会版':'工作日完整版'))}
 function showToast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(function(){t.classList.remove('show')},2500)}
 function exportData(){var d=loadData();document.querySelectorAll('[contenteditable="true"]').forEach(function(e,i){d['editable_'+i]=e.innerHTML});document.querySelectorAll('.check-box').forEach(function(e,i){d['check_'+i]=e.classList.contains('checked')});d.currentMode=currentMode;d.lastUpdate=new Date().toISOString();d.exportDate=new Date().toLocaleString('zh-CN');var b=new Blob([JSON.stringify(d,null,2)],{type:'application/json'});var u=URL.createObjectURL(b);var a=document.createElement('a');a.href=u;a.download='成长工作台备份_'+new Date().toISOString().slice(0,10)+'.json';a.click();URL.revokeObjectURL(u);showToast('📤 数据已导出')}
 function importData(ev){var f=ev.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(e){try{var d=JSON.parse(e.target.result);localStorage.setItem(STORAGE_KEY,JSON.stringify(d));restoreData();showToast('📥 数据已导入并恢复')}catch(err){showToast('❌ 导入失败，文件格式不正确')}};r.readAsText(f);ev.target.value=''}
@@ -793,7 +965,7 @@ document.addEventListener('DOMContentLoaded',init);
 setInterval(function(){saveData()},30000);
 window.addEventListener('beforeunload',saveData);
 window.addEventListener('pagehide',saveData);
-window.saveAllData=saveData;window.exportData=exportData;window.importData=importData;window.generateTodaySchedule=generateTodaySchedule;window.selectMode=selectMode;window.toggleMobileNav=toggleMobileNav;window.closeMobileNav=closeMobileNav;
+function switchDay(day){document.querySelectorAll("#modeFull .day-panel").forEach(function(p){p.classList.remove("active")});var panel=document.getElementById("panel-"+day);if(panel)panel.classList.add("active");document.querySelectorAll("#modeFull .day-tab").forEach(function(t){t.classList.remove("selected")});var tabs=document.querySelectorAll("#modeFull .day-tab");var dayIndex={mon:0,tue:1,wed:2,thu:3,fri:4};if(dayIndex[day]!==undefined&&tabs[dayIndex[day]])tabs[dayIndex[day]].classList.add("selected")}function switchWeekendDay(day){document.querySelectorAll("#modeWeekend .day-panel").forEach(function(p){p.classList.remove("active")});var panel=document.getElementById("panel-"+day);if(panel)panel.classList.add("active");document.querySelectorAll("#modeWeekend .weekend-tab").forEach(function(t){t.classList.remove("selected")});var tabs=document.querySelectorAll("#modeWeekend .weekend-tab");if(day==="sat"&&tabs[0])tabs[0].classList.add("selected");if(day==="sun"&&tabs[1])tabs[1].classList.add("selected")}window.saveAllData=saveData;window.exportData=exportData;window.importData=importData;window.generateTodaySchedule=generateTodaySchedule;window.selectMode=selectMode;window.switchDay=switchDay;window.switchWeekendDay=switchWeekendDay;window.toggleMobileNav=toggleMobileNav;window.closeMobileNav=closeMobileNav;
 </script>
 
 </body>
