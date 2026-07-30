@@ -1,0 +1,23 @@
+{
+  "name": "个人成长工作台",
+  "short_name": "成长工作台",
+  "description": "莫兰迪配色 · 个人成长工作台",
+  "start_url": "/growth-dashboard/",
+  "scope": "/growth-dashboard/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#F5F0EB",
+  "theme_color": "#F5F0EB",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
