@@ -5,1089 +5,494 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover,user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Yuの工作台">
+<meta name="apple-mobile-web-app-title" content="Yu工作台">
 <meta name="theme-color" content="#F5F0EB">
-<meta name="description" content="Yuの个人成长工作台 · 莫兰迪粉调">
 <title>Yuの工作台</title>
+<script src="data-exercise.js"></script>
+<script src="data-english.js"></script>
+<script src="data-finance.js"></script>
+<script src="data-shopify.js"></script>
 <style>
 :root{
-  --bg:#F5F0EB;--bg-card:#FAF7F3;--bg-card-alt:#F0ECE6;--bg-sidebar:#EDE4DF;
-  --border:#D9C5C0;--border-light:#E8D5CE;--border-focus:#C4A8A0;
-  --text-primary:#4A3C38;--text-secondary:#7A6E68;--text-muted:#A0908A;--text-soft:#8B7D78;
-  --accent-rose:#C4A8A0;--accent-rose-light:#E8D5CE;--accent-rose-bg:rgba(196,168,160,0.12);
-  --accent-rose-mid:#D9C5C0;
-  --accent-sage:#A3B5A6;--accent-sage-light:#CDD9CF;--accent-sage-bg:rgba(163,181,166,0.12);
-  --accent-dust:#B8ADA0;--accent-dust-light:#D9D1C5;--accent-dust-bg:rgba(184,173,160,0.10);
-  --accent-lavender:#B0A8B9;--accent-lavender-light:#D6D0DD;--accent-lavender-bg:rgba(176,168,185,0.12);
-  --accent-sky:#A3B4C2;--accent-sky-light:#CBD7E0;--accent-sky-bg:rgba(163,180,194,0.12);
-  --red-morandi:#C49A98;--red-morandi-bg:rgba(196,154,152,0.12);
-  --green-morandi:#9FB5A0;--green-morandi-bg:rgba(159,181,160,0.12);
-  --yellow-morandi:#C4B898;--yellow-morandi-bg:rgba(196,184,152,0.12);
-  --shadow-sm:0 1px 3px rgba(74,60,56,0.06);--shadow-md:0 4px 16px rgba(74,60,56,0.08);--shadow-lg:0 8px 32px rgba(74,60,56,0.10);
-  --radius-sm:6px;--radius-md:10px;--radius-lg:16px;
-  --font-sans:"PingFang SC","Noto Sans SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
-  --font-mono:"SF Mono","JetBrains Mono","Consolas",monospace;
+  --bg:#F5F0EB;--bg-card:#FAF7F3;--bg-card-alt:#F0ECE6;--bg-sidebar:#EDE7E0;
+  --border:#D9D2C5;--border-light:#E5DFD5;--border-focus:#C4BBA8;
+  --text-primary:#4A443C;--text-secondary:#7A7368;--text-muted:#A0988A;
+  --rose:#C4A8A0;--rose-light:#E8D5CE;--rose-bg:rgba(196,168,160,0.12);
+  --rose-deep:#B8958B;
+  --sage:#A3B5A6;--sage-bg:rgba(163,181,166,0.12);
+  --lavender:#B0A8B9;--lavender-bg:rgba(176,168,185,0.12);
+  --sky:#A3B4C2;--sky-bg:rgba(163,180,194,0.12);
+  --gold:#C4B898;--gold-bg:rgba(196,184,152,0.12);
+  --shadow-sm:0 1px 3px rgba(74,68,60,0.05);
+  --shadow-md:0 4px 16px rgba(74,68,60,0.07);
+  --shadow-lg:0 8px 32px rgba(74,68,60,0.09);
+  --r-sm:6px;--r-md:10px;--r-lg:16px;
+  --font:"PingFang SC","Noto Sans SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --mono:"SF Mono","JetBrains Mono","Consolas",monospace;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{font-size:16px;scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
-body{font-family:var(--font-sans);background:var(--bg);color:var(--text-primary);line-height:1.68;min-height:100vh;overscroll-behavior:none}
+html{font-size:16px;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+body{font-family:var(--font);background:var(--bg);color:var(--text-primary);line-height:1.65;min-height:100vh}
 
-.top-bar{display:none;position:sticky;top:0;z-index:100;background:var(--bg-sidebar);border-bottom:1px solid var(--border);padding:12px 16px;align-items:center;justify-content:space-between}
-.top-bar .logo{font-weight:700;font-size:.95rem}
-.top-bar .menu-btn{background:none;border:1px solid var(--border);border-radius:var(--radius-sm);padding:6px 12px;font-size:.82rem;color:var(--text-secondary);cursor:pointer;font-family:var(--font-sans)}
-.mobile-nav{display:none;position:fixed;top:52px;left:0;right:0;bottom:0;z-index:99;background:var(--bg);padding:16px;flex-direction:column;gap:4px;overflow-y:auto}
-.mobile-nav.open{display:flex}
-.mobile-nav a{display:block;padding:12px 16px;border-radius:var(--radius-sm);color:var(--text-secondary);text-decoration:none;font-size:.9rem;font-weight:500;border:1px solid transparent}
-.mobile-nav a:hover,.mobile-nav a.active{background:var(--accent-rose-bg);color:var(--accent-rose);border-color:var(--accent-rose-light)}
-
-.app-layout{display:flex;min-height:100vh}
-#sidebar{width:240px;min-width:240px;background:var(--bg-sidebar);border-right:1px solid var(--border);padding:24px 16px;position:sticky;top:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column;gap:20px;z-index:10;transition:transform .3s}
-#sidebar.collapsed{transform:translateX(-100%);position:fixed}
-.sidebar-logo{font-size:1.05rem;font-weight:700;color:var(--text-primary);letter-spacing:-0.01em;line-height:1.3}
+.sidebar{position:fixed;top:0;left:0;width:240px;height:100vh;background:var(--bg-sidebar);border-right:1px solid var(--border);display:flex;flex-direction:column;padding:24px 16px;z-index:100;transition:transform .25s;overflow-y:auto}
+.sidebar-logo{font-size:1.15rem;font-weight:700;color:var(--rose-deep);margin-bottom:4px}
 .sidebar-logo span{display:block;font-size:.7rem;font-weight:500;color:var(--text-muted);margin-top:2px}
-.sidebar-nav{display:flex;flex-direction:column;gap:2px}
-.sidebar-nav a{display:block;padding:9px 12px;border-radius:var(--radius-sm);color:var(--text-secondary);text-decoration:none;font-size:.84rem;font-weight:500;transition:all .18s ease;white-space:nowrap}
-.sidebar-nav a:hover{background:var(--accent-rose-bg);color:var(--accent-rose)}
-.sidebar-nav a.active{background:var(--accent-rose-bg);color:var(--accent-rose);font-weight:600}
-.sidebar-divider{height:1px;background:var(--border);margin:4px 0}
+.sidebar-nav{display:flex;flex-direction:column;gap:2px;margin-top:20px}
+.nav-item{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:var(--r-sm);color:var(--text-secondary);text-decoration:none;font-size:.88rem;font-weight:500;cursor:pointer;transition:all .15s;border:1px solid transparent}
+.nav-item:hover{background:var(--rose-bg);color:var(--rose-deep)}
+.nav-item.active{background:var(--rose-bg);color:var(--rose-deep);font-weight:600;border-color:var(--rose-light)}
+.nav-icon{font-size:1.15rem;width:24px;text-align:center}
+.sidebar-tip{margin-top:auto;padding:12px;background:var(--bg-card);border-radius:var(--r-md);border:1px solid var(--border-light);font-size:.76rem;color:var(--text-muted);line-height:1.6}
+.sidebar-tip strong{color:var(--text-secondary)}
 
-#main-content{flex:1;padding:24px 32px 40px;max-width:1100px;overflow-y:auto}
+.main{margin-left:240px;padding:28px 36px 60px;min-height:100vh;transition:margin .25s}
+.page{display:none}
+.page.active{display:block;animation:fadeIn .25s}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
-.page-content{display:none}
-.page-content.active{display:block}
+.mobile-header{display:none;position:sticky;top:0;z-index:90;background:var(--bg-sidebar);border-bottom:1px solid var(--border);padding:12px 16px;align-items:center;justify-content:space-between}
+.mobile-header .logo{font-weight:700;font-size:.95rem;color:var(--rose-deep)}
+.hamburger{background:none;border:1px solid var(--border);border-radius:var(--r-sm);padding:6px 12px;font-size:1rem;cursor:pointer;color:var(--text-secondary)}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.3);z-index:99}
 
-h1{font-size:1.6rem;font-weight:700;color:var(--text-primary);letter-spacing:-0.02em;margin-bottom:4px}
-h2{font-size:1.25rem;font-weight:650;color:var(--text-primary);margin:0 0 14px}
-h3{font-size:1.05rem;font-weight:600;color:var(--text-primary);margin:0 0 8px}
-h4{font-size:.92rem;font-weight:600;color:var(--text-secondary);margin:0 0 6px}
-.section-header{display:flex;align-items:baseline;gap:10px;margin-bottom:18px;flex-wrap:wrap}
-.section-header .tag{font-size:.7rem;font-weight:600;padding:3px 10px;border-radius:20px;background:var(--accent-rose-bg);color:var(--accent-rose);letter-spacing:.03em}
+.card{background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:22px 26px;margin-bottom:18px;box-shadow:var(--shadow-sm)}
+.card.rose{border-left:3px solid var(--rose)}
+.card.sage{border-left:3px solid var(--sage)}
+.card.lavender{border-left:3px solid var(--lavender)}
+.card.sky{border-left:3px solid var(--sky)}
+.card.gold{border-left:3px solid var(--gold)}
 
-.card{background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:20px 24px;margin-bottom:16px;box-shadow:var(--shadow-sm);transition:box-shadow .2s}
-.card:hover{box-shadow:var(--shadow-md)}
-.card.rose{border-left:3px solid var(--accent-rose)}
-.card.sage{border-left:3px solid var(--accent-sage)}
-.card.dust{border-left:3px solid var(--accent-dust)}
-.card.lavender{border-left:3px solid var(--accent-lavender)}
-.card.sky{border-left:3px solid var(--accent-sky)}
+h1{font-size:1.5rem;font-weight:700;margin-bottom:6px}
+h2{font-size:1.2rem;font-weight:650;margin-bottom:12px}
+h3{font-size:1rem;font-weight:600;margin-bottom:8px}
+h4{font-size:.9rem;font-weight:600;color:var(--text-secondary);margin-bottom:6px}
+.muted{color:var(--text-muted)}
+.tag{display:inline-block;font-size:.7rem;font-weight:600;padding:2px 10px;border-radius:20px;background:var(--rose-bg);color:var(--rose-deep)}
+
+.clock-card{text-align:center;padding:32px 20px;background:linear-gradient(135deg,var(--bg-card) 0%,var(--rose-bg) 100%);border:1px solid var(--rose-light)}
+.clock-time{font-family:var(--mono);font-size:3rem;font-weight:300;color:var(--text-primary);letter-spacing:.05em;line-height:1}
+.clock-date{margin-top:8px;font-size:.85rem;color:var(--text-muted)}
+.clock-greeting{margin-top:6px;font-size:.78rem;color:var(--rose-deep)}
+
+.quote-card{background:linear-gradient(135deg,var(--rose-bg) 0%,var(--bg-card) 100%);border:1px solid var(--rose-light);border-radius:var(--r-lg);padding:24px 28px;margin-bottom:18px;text-align:center}
+.quote-cn{font-size:1.05rem;font-weight:600;color:var(--text-primary);line-height:1.7;margin-bottom:6px}
+.quote-en{font-size:.82rem;color:var(--rose-deep);font-style:italic;line-height:1.6}
+.quote-refresh{margin-top:10px;font-size:.72rem;color:var(--text-muted);cursor:pointer;background:none;border:none;font-family:var(--font)}
+
+.checkin-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+.checkin-card{background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--r-md);padding:16px 14px;text-align:center;cursor:pointer;transition:all .2s;position:relative}
+.checkin-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.checkin-card.done{border-color:var(--sage);background:var(--sage-bg)}
+.checkin-icon{font-size:1.5rem;margin-bottom:6px}
+.checkin-name{font-size:.78rem;font-weight:600;color:var(--text-secondary);margin-bottom:4px}
+.checkin-status{font-size:.72rem;color:var(--text-muted)}
+.checkin-card.done .checkin-status{color:var(--sage)}
+.checkin-total{font-size:1.3rem;font-weight:700;color:var(--rose-deep);margin-top:4px}
+.checkin-total-label{font-size:.65rem;color:var(--text-muted)}
+
+.quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+.quick-card{background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--r-md);padding:18px 14px;text-align:center;cursor:pointer;transition:all .2s}
+.quick-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.quick-icon{font-size:1.8rem;margin-bottom:8px}
+.quick-name{font-size:.82rem;font-weight:600;color:var(--text-secondary)}
+
+.progress-wrap{margin:12px 0}
+.progress-label{display:flex;justify-content:space-between;font-size:.78rem;color:var(--text-muted);margin-bottom:6px}
+.progress-bar{height:8px;background:var(--bg-card-alt);border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--rose),var(--rose-deep));border-radius:4px;transition:width .4s}
+
+.stage-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:20px;font-size:.75rem;font-weight:600;margin-bottom:12px}
+.stage-badge.rose{background:var(--rose-bg);color:var(--rose-deep)}
+.stage-badge.sage{background:var(--sage-bg);color:var(--sage)}
+.stage-badge.lavender{background:var(--lavender-bg);color:var(--lavender)}
+.stage-badge.sky{background:var(--sky-bg);color:var(--sky)}
+.stage-badge.gold{background:var(--gold-bg);color:#A0936B}
+
+.content-block{margin-bottom:16px}
+.content-block h4{color:var(--rose-deep);margin-bottom:6px}
+.content-text{font-size:.85rem;color:var(--text-primary);line-height:1.7}
+
+.word-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px;margin:10px 0}
+.word-item{background:var(--bg-card-alt);border:1px solid var(--border-light);border-radius:var(--r-sm);padding:10px 14px}
+.word-head{display:flex;align-items:baseline;gap:8px;margin-bottom:2px}
+.word-word{font-weight:700;font-size:.88rem;color:var(--text-primary)}
+.word-phonetic{font-family:var(--mono);font-size:.72rem;color:var(--text-muted)}
+.word-meaning{font-size:.78rem;color:var(--text-secondary);margin-bottom:2px}
+.word-example{font-size:.72rem;color:var(--text-muted);font-style:italic}
+
+.sentence-list{margin:8px 0;padding:0;list-style:none}
+.sentence-list li{padding:6px 12px;background:var(--bg-card-alt);border-radius:var(--r-sm);margin-bottom:4px;font-size:.82rem;color:var(--text-primary)}
+.sentence-list li::before{content:'▸ ';color:var(--rose)}
+
+.workout-section{background:var(--bg-card-alt);border-radius:var(--r-md);padding:14px 18px;margin-bottom:12px}
+.workout-section h4{display:flex;align-items:center;gap:6px;margin-bottom:8px}
+.exercise-move{display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid var(--border-light);font-size:.82rem}
+.exercise-move:last-child{border-bottom:none}
+.exercise-name{flex:1;font-weight:500}
+.exercise-weight{color:var(--rose-deep);font-weight:600;font-size:.78rem}
+.exercise-sets{color:var(--text-muted);font-size:.75rem}
 
 .table-wrap{overflow-x:auto;margin:10px 0;-webkit-overflow-scrolling:touch}
 table{width:100%;border-collapse:collapse;font-size:.82rem}
-thead th{text-align:left;padding:8px 12px;font-weight:600;font-size:.74rem;color:var(--text-muted);letter-spacing:.04em;border-bottom:2px solid var(--border);white-space:nowrap}
-tbody td{padding:8px 12px;border-bottom:1px solid var(--border-light);color:var(--text-primary);vertical-align:top}
+thead th{text-align:left;padding:8px 12px;font-weight:600;font-size:.75rem;color:var(--text-muted);border-bottom:2px solid var(--border);white-space:nowrap}
+tbody td{padding:8px 12px;border-bottom:1px solid var(--border-light)}
 tbody tr:last-child td{border-bottom:none}
-tbody tr:hover{background:var(--accent-dust-bg)}
-td.empty{color:var(--text-muted);font-style:italic}
-td[contenteditable="true"]{cursor:text;min-width:50px;border-radius:3px;transition:background .15s}
-td[contenteditable="true"]:focus{outline:2px solid var(--accent-rose);background:var(--accent-rose-bg);font-style:normal}
-td[contenteditable="true"]:hover:not(:focus){background:var(--accent-dust-bg)}
 
-.badge{display:inline-block;font-size:.7rem;font-weight:600;padding:2px 8px;border-radius:20px;letter-spacing:.02em;white-space:nowrap}
-.badge-must{background:var(--red-morandi-bg);color:var(--red-morandi)}
-.badge-try{background:var(--yellow-morandi-bg);color:#A0936B}
-.badge-optional{background:var(--green-morandi-bg);color:var(--green-morandi)}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;border-radius:var(--r-sm);font-size:.82rem;font-weight:600;border:1px solid var(--border);background:var(--bg-card);color:var(--text-secondary);cursor:pointer;transition:all .15s;font-family:var(--font)}
+.btn:hover{background:var(--rose-bg);color:var(--rose-deep);border-color:var(--rose-light)}
+.btn.checkin-btn{background:var(--rose);color:#fff;border-color:var(--rose)}
+.btn.checkin-btn.done{background:var(--sage);border-color:var(--sage)}
+.btn.small{padding:5px 12px;font-size:.75rem}
+.action-bar{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap;align-items:center}
 
-.kanban-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:10px}
-.kanban-item{background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--radius-md);padding:16px 18px}
-.kanban-item h4{font-size:.85rem;margin-bottom:6px}
-.kanban-item .field-row{display:flex;gap:6px;margin-bottom:5px;font-size:.8rem}
-.kanban-item .field-label{color:var(--text-muted);font-weight:600;min-width:60px;flex-shrink:0}
-.kanban-item .field-value{color:var(--text-primary)}
+.note-area{width:100%;min-height:80px;padding:12px 14px;border:1px solid var(--border-light);border-radius:var(--r-md);font-family:var(--font);font-size:.82rem;color:var(--text-primary);background:var(--bg-card);resize:vertical;line-height:1.6}
+.note-area:focus{outline:2px solid var(--rose);border-color:var(--rose)}
 
-.schedule-mode{background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:20px 24px;margin-bottom:14px;box-shadow:var(--shadow-sm)}
-.schedule-mode .mode-title{font-size:.95rem;font-weight:700;color:var(--text-primary);display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap}
-.mode-badge{font-size:.68rem;font-weight:600;padding:2px 8px;border-radius:20px}
-.mode-badge.full{background:var(--accent-sage-bg);color:var(--accent-sage)}
-.mode-badge.min{background:var(--accent-lavender-bg);color:var(--accent-lavender)}
-.mode-badge.weekend{background:var(--accent-sky-bg);color:var(--accent-sky)}
+[contenteditable="true"]{cursor:text;border-radius:3px;transition:background .15s;min-width:40px}
+[contenteditable="true"]:focus{outline:2px solid var(--rose);background:var(--rose-bg)}
+[contenteditable="true"]:hover:not(:focus){background:var(--rose-bg)}
 
-.time-block{display:flex;align-items:center;padding:6px 10px;border-radius:var(--radius-sm);margin-bottom:3px;font-size:.81rem;gap:8px;transition:background .15s}
-.time-block:hover{background:var(--accent-dust-bg)}
-.time-block .time{font-family:var(--font-mono);font-size:.75rem;font-weight:600;color:var(--accent-rose);min-width:95px}
-.time-block .task-name{flex:1;color:var(--text-primary)}
-.time-block .task-duration{font-size:.72rem;color:var(--text-muted);min-width:45px;text-align:right}
-.time-block .task-output{font-size:.72rem;color:var(--accent-sage);min-width:90px;text-align:right}
-.time-block.rest{opacity:.6}
-.time-block.rest .time{color:var(--text-muted)}
-
-.frog-list{display:flex;flex-direction:column;gap:8px}
-.frog-card{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--bg-card-alt);border-radius:var(--radius-md);border:1px solid var(--border-light)}
-.frog-num{font-size:1.3rem;line-height:1;min-width:32px;text-align:center}
-.frog-info{flex:1;font-size:.82rem}
-.frog-info .frog-label{font-weight:600;color:var(--text-primary)}
-.frog-info .frog-meta{font-size:.72rem;color:var(--text-muted);margin-top:1px}
-
-.guide-box{background:var(--accent-rose-bg);border:1px solid var(--accent-rose-light);border-radius:var(--radius-md);padding:14px 18px;margin:14px 0;font-size:.82rem;color:var(--text-secondary)}
-.guide-box .guide-title{font-weight:700;font-size:.75rem;color:var(--accent-rose);letter-spacing:.06em;margin-bottom:8px}
-.guide-box ul{list-style:none;padding:0}
-.guide-box li{padding:4px 0;position:relative;padding-left:16px}
-.guide-box li::before{content:'·';position:absolute;left:0;color:var(--accent-rose);font-weight:700}
-
-blockquote{border-left:3px solid var(--accent-rose-light);padding:6px 14px;margin:10px 0;font-size:.82rem;color:var(--text-soft);background:var(--accent-rose-bg);border-radius:0 var(--radius-sm) var(--radius-sm) 0}
-
-.checklist-item{display:flex;align-items:flex-start;gap:8px;padding:6px 0;font-size:.82rem;border-bottom:1px solid var(--border-light)}
-.checklist-item:last-child{border-bottom:none}
-.check-box{width:18px;height:18px;border:2px solid var(--border-focus);border-radius:4px;flex-shrink:0;margin-top:1px;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center}
-.check-box.checked{background:var(--accent-sage);border-color:var(--accent-sage)}
-.check-box.checked::after{content:'✓';color:#fff;font-size:11px;font-weight:700}
-.checklist-item .reason{color:var(--text-muted);font-size:.75rem}
-
-.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 16px;border-radius:var(--radius-sm);font-size:.8rem;font-weight:600;border:1px solid var(--border);background:var(--bg-card);color:var(--text-secondary);cursor:pointer;transition:all .15s;font-family:var(--font-sans);white-space:nowrap}
-.btn:hover{background:var(--accent-rose-bg);color:var(--accent-rose);border-color:var(--accent-rose-light)}
-.btn.primary{background:var(--accent-rose);color:#fff;border-color:var(--accent-rose)}
-.btn.primary:hover{opacity:.9}
-.btn.small{padding:4px 10px;font-size:.73rem}
-.action-bar{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}
-
-.mode-selector{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
-.mode-btn{padding:8px 16px;border-radius:var(--radius-md);border:2px solid var(--border-light);background:var(--bg-card);cursor:pointer;font-size:.82rem;font-weight:600;color:var(--text-secondary);transition:all .2s;font-family:var(--font-sans)}
-.mode-btn:hover{border-color:var(--accent-rose);color:var(--accent-rose)}
-.mode-btn.selected{border-color:var(--accent-rose);background:var(--accent-rose-bg);color:var(--accent-rose)}
-.mode-btn .mode-hint{display:block;font-size:.68rem;font-weight:400;color:var(--text-muted);margin-top:1px}
-
-.day-tab{padding:7px 14px;border-radius:var(--radius-sm);border:1px solid var(--border-light);background:var(--bg-card);cursor:pointer;font-size:.8rem;font-weight:600;color:var(--text-muted);transition:all .15s;font-family:var(--font-sans)}
-.day-tab:hover{border-color:var(--accent-rose);color:var(--accent-rose)}
-.day-tab.selected{background:var(--accent-rose-bg);border-color:var(--accent-rose);color:var(--accent-rose)}
-.day-panel{display:none}
-.day-panel.active{display:block}
-
-.clock-time{font-size:2.4rem;font-weight:700;color:var(--accent-rose);text-align:center;font-family:var(--font-mono);letter-spacing:.02em}
-.clock-date{font-size:.9rem;color:var(--text-muted);text-align:center;margin-top:2px}
-
-.checkin-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:14px 0}
-.checkin-card{padding:14px 16px;background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--radius-md);text-align:center;cursor:pointer;transition:all .2s;user-select:none}
-.checkin-card:hover{box-shadow:var(--shadow-md);border-color:var(--accent-rose-light)}
-.checkin-card .ci-icon{font-size:1.5rem;margin-bottom:4px}
-.checkin-card .ci-name{font-size:.78rem;font-weight:600;color:var(--text-secondary)}
-.checkin-card .ci-status{font-size:.85rem;font-weight:700;margin-top:4px}
-.checkin-card .ci-total{font-size:.7rem;color:var(--text-muted);margin-top:2px}
-.checkin-card.done{border-color:var(--accent-sage);background:var(--accent-sage-bg)}
-.checkin-card.done .ci-status{color:var(--accent-sage)}
-
-.quote-card{background:var(--accent-rose-bg);border-left:3px solid var(--accent-rose);border-radius:var(--radius-md);padding:16px 20px;margin:14px 0}
-.quote-card .quote-cn{font-size:.95rem;font-weight:600;color:var(--text-primary);margin-bottom:4px}
-.quote-card .quote-en{font-size:.8rem;color:var(--text-muted);font-style:italic}
-
-details{margin:8px 0}
-summary{cursor:pointer;font-weight:600;font-size:.85rem;color:var(--accent-rose);padding:6px 0;user-select:none}
-summary:hover{opacity:.8}
-details .detail-content{padding:10px 14px;background:var(--bg-card-alt);border-radius:var(--radius-sm);font-size:.8rem;color:var(--text-secondary);margin-top:4px}
-
-.help-area{margin-top:24px;padding:16px 20px;background:var(--bg-card-alt);border-radius:var(--radius-md);border:1px solid var(--border-light);font-size:.78rem;color:var(--text-muted)}
-.help-area strong{color:var(--text-secondary)}
-.help-area code{background:var(--accent-rose-bg);padding:1px 6px;border-radius:3px;font-size:.76rem;color:var(--accent-rose)}
-
-.section-divider{height:1px;background:linear-gradient(to right,transparent,var(--border) 20%,var(--border) 80%,transparent);margin:28px 0}
-
-.footer{text-align:center;padding:28px 0 8px;color:var(--text-muted);font-size:.75rem}
-
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--text-primary);color:var(--bg);padding:10px 20px;border-radius:var(--radius-md);font-size:.82rem;font-weight:600;z-index:1000;opacity:0;transition:opacity .3s;pointer-events:none;box-shadow:var(--shadow-lg)}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--text-primary);color:var(--bg);padding:10px 22px;border-radius:var(--r-md);font-size:.82rem;font-weight:600;z-index:1000;opacity:0;transition:opacity .3s;pointer-events:none;box-shadow:var(--shadow-lg)}
 .toast.show{opacity:1}
 
-.warning-box{background:rgba(201,169,146,0.12);border:1px solid rgba(201,169,146,0.4);border-radius:var(--radius-md);padding:12px 16px;margin:12px 0;font-size:.8rem;color:var(--text-secondary)}
-.warning-box::before{content:'⚠️ ';font-weight:700}
+.disclaimer{background:var(--gold-bg);border:1px solid var(--gold);border-radius:var(--r-md);padding:10px 14px;font-size:.75rem;color:#8A7E5B;margin:10px 0}
 
-.info-row{display:flex;gap:8px;margin-bottom:4px;font-size:.82rem}
-.info-row .info-label{color:var(--text-muted);font-weight:600;min-width:70px;flex-shrink:0}
-.info-row .info-value{color:var(--text-primary)}
+.week-preview{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin:10px 0}
+.week-day{text-align:center;padding:10px 6px;background:var(--bg-card-alt);border-radius:var(--r-sm);border:1px solid var(--border-light)}
+.week-day.today{border-color:var(--rose);background:var(--rose-bg)}
+.week-day-name{font-size:.72rem;font-weight:600;color:var(--text-muted);margin-bottom:4px}
+.week-day-focus{font-size:.68rem;color:var(--text-secondary);line-height:1.3}
 
-.tip-box{background:var(--accent-sage-bg);border:1px solid var(--accent-sage-light);border-radius:var(--radius-md);padding:14px 18px;margin:12px 0;font-size:.82rem;color:var(--text-secondary)}
-.tip-box .tip-title{font-weight:700;font-size:.78rem;color:var(--accent-sage);margin-bottom:6px}
+.help-box{background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:20px 24px;margin-top:24px}
+.help-box h3{margin-bottom:10px}
+.help-cmd{display:inline-block;background:var(--bg-card-alt);border:1px solid var(--border-light);border-radius:var(--r-sm);padding:2px 8px;font-family:var(--mono);font-size:.76rem;color:var(--rose-deep);margin:2px 0}
 
 @media(max-width:900px){
-  #sidebar{position:fixed;left:0;top:0;z-index:200;transform:translateX(-100%)}
-  #sidebar.open{transform:translateX(0)}
-  .top-bar{display:flex}
-  #main-content{padding:16px 14px;max-width:100%}
-  .kanban-grid{grid-template-columns:1fr}
-  .checkin-grid{grid-template-columns:repeat(2,1fr)}
-  h1{font-size:1.3rem}h2{font-size:1.1rem}
+  .sidebar{transform:translateX(-100%)}
+  .sidebar.open{transform:translateX(0)}
+  .main{margin-left:0;padding:20px 16px 50px}
+  .mobile-header{display:flex}
+  .overlay.show{display:block}
+  .checkin-grid,.quick-grid{grid-template-columns:repeat(2,1fr)}
+  .clock-time{font-size:2.2rem}
+  .word-grid{grid-template-columns:1fr}
+  .week-preview{grid-template-columns:repeat(4,1fr)}
+  h1{font-size:1.25rem}
   .card{padding:16px 14px}
-  .schedule-mode{padding:16px 14px}
-  .time-block .time{min-width:75px;font-size:.7rem}
-  .time-block .task-duration{display:none}
-  .time-block .task-output{min-width:55px;font-size:.68rem}
-  .clock-time{font-size:1.8rem}
 }
-
-@supports(padding-bottom:env(safe-area-inset-bottom)){
-  #main-content{padding-bottom:calc(40px + env(safe-area-inset-bottom))}
-  .toast{bottom:calc(24px + env(safe-area-inset-bottom))}
+@media(max-width:600px){
+  .checkin-grid,.quick-grid{grid-template-columns:repeat(2,1fr)}
+  .week-preview{grid-template-columns:repeat(2,1fr)}
 }
-
-@media print{
-  #sidebar,.top-bar,.action-bar,.mode-selector,.btn{display:none}
-  #main-content{max-width:100%;padding:0}
-  .card{box-shadow:none;break-inside:avoid}
-}
+@media print{.sidebar,.mobile-header,.action-bar,.btn{display:none}.main{margin:0;padding:0}.page{display:block!important}}
 </style>
 </head>
 <body>
 
-<div class="top-bar">
+<div class="mobile-header">
   <div class="logo">🌱 Yuの工作台</div>
-  <button class="menu-btn" onclick="toggleSidebar()">☰ 菜单</button>
+  <button class="hamburger" onclick="toggleSidebar()">☰</button>
 </div>
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 
-<div class="app-layout">
-
-<aside id="sidebar">
-  <div class="sidebar-logo">🌱 Yuの工作台<span>Morandi Rose</span></div>
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">🌱 Yuの工作台<span>v4.0 · 技能提升</span></div>
   <nav class="sidebar-nav">
-    <a href="#" onclick="switchPage('dashboard');closeSidebar()" class="active" data-page="dashboard">🏠 首页仪表盘</a>
-    <a href="#" onclick="switchPage('english');closeSidebar()" data-page="english">📗 英语学习</a>
-    <a href="#" onclick="switchPage('exercise');closeSidebar()" data-page="exercise">🏃 锻炼身体</a>
-    <a href="#" onclick="switchPage('finance');closeSidebar()" data-page="finance">💰 理财学习</a>
-    <a href="#" onclick="switchPage('schedule');closeSidebar()" data-page="schedule">📅 每日日程计划</a>
-    <a href="#" onclick="switchPage('skills');closeSidebar()" data-page="skills">💼 技能提升看板</a>
-    <a href="#" onclick="switchPage('job');closeSidebar()" data-page="job">🧾 求职项目看板</a>
-    <a href="#" onclick="switchPage('shopify');closeSidebar()" data-page="shopify">🛒 Shopify副业看板</a>
-    <a href="#" onclick="switchPage('review');closeSidebar()" data-page="review">🔁 周复盘</a>
+    <div class="nav-item active" onclick="switchPage('home')"><span class="nav-icon">🏠</span>首页仪表盘</div>
+    <div class="nav-item" onclick="switchPage('exercise')"><span class="nav-icon">🏃</span>塑形训练</div>
+    <div class="nav-item" onclick="switchPage('english')"><span class="nav-icon">📗</span>英语学习</div>
+    <div class="nav-item" onclick="switchPage('finance')"><span class="nav-icon">💰</span>理财教学</div>
+    <div class="nav-item" onclick="switchPage('shopify')"><span class="nav-icon">🛒</span>Shopify技能</div>
   </nav>
-  <div class="sidebar-divider"></div>
-  <div style="font-size:.72rem;color:var(--text-muted);line-height:1.5;padding:8px">
-    <strong>💡</strong> 7天逐日固定日程<br>按天执行不纠结<br>任务宁少但高价值<br>容错兜底，只看产出
+  <div class="sidebar-tip">
+    <strong>💡 全局规则</strong><br>四大板块每日同步刷新；打卡当日重置、月度累积；每月末生成进度总结。<br><br>
+    <strong>📍 作息</strong><br>8:30起床 · 22:30睡觉<br>9-11运动 · 11-12:30午饭<br>工作13-18 + 19:30-21:40
   </div>
 </aside>
 
-<main id="main-content">
+<div class="main">
 
 <div class="action-bar">
-  <button class="btn primary" onclick="generateTodaySchedule()">📅 生成今日日程</button>
-  <button class="btn" onclick="saveData()">💾 保存</button>
-  <button class="btn" onclick="exportData()">📤 导出备份</button>
-  <button class="btn" onclick="document.getElementById('importFile').click()">📥 导入备份</button>
+  <button class="btn" onclick="refreshToday()" style="background:var(--rose);color:#fff;border-color:var(--rose)">🔄 刷新今日内容</button>
+  <button class="btn small" onclick="exportData()">📤 导出</button>
+  <button class="btn small" onclick="document.getElementById('importFile').click()">📥 导入</button>
   <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">
-  <span style="font-size:.7rem;color:var(--text-muted);align-self:center;margin-left:auto" id="saveStatus">就绪</span>
+  <span style="font-size:.7rem;color:var(--text-muted);margin-left:auto" id="saveStatus">就绪</span>
 </div>
 
-<!-- ====== 首页仪表盘 ====== -->
-<div class="page-content active" id="page-dashboard">
-  <div class="section-header"><h1>🏠 首页仪表盘</h1></div>
-  
-  <div class="card rose" style="text-align:center;padding:28px">
-    <div class="clock-time" id="clockTime">--:--:--</div>
-    <div class="clock-date" id="clockDate">----年--月--日 星期-</div>
+<!-- 首页仪表盘 -->
+<div class="page active" id="page-home">
+  <div class="clock-card card">
+    <div class="clock-time" id="clock">--:--:--</div>
+    <div class="clock-date" id="clockDate">加载中...</div>
+    <div class="clock-greeting" id="clockGreeting"></div>
   </div>
-
-  <div class="quote-card" id="quoteCard">
-    <div class="quote-cn" id="quoteCn">种一棵树最好的时间是十年前，其次是现在。</div>
-    <div class="quote-en" id="quoteEn">The best time to plant a tree was ten years ago. The second best is now.</div>
+  <div class="quote-card">
+    <div class="quote-cn" id="quoteCn">加载中...</div>
+    <div class="quote-en" id="quoteEn"></div>
+    <button class="quote-refresh" onclick="refreshQuote()">🔄 换一句</button>
   </div>
-
-  <h3>📊 打卡统计</h3>
-  <div class="checkin-grid">
-    <div class="checkin-card" id="ci-english" onclick="checkin('english')">
-      <div class="ci-icon">📗</div><div class="ci-name">英语学习</div>
-      <div class="ci-status" id="ci-status-english">⬜ 未完成</div>
-      <div class="ci-total">累计 <span id="ci-total-english">0</span> 天</div>
-    </div>
-    <div class="checkin-card" id="ci-exercise" onclick="checkin('exercise')">
-      <div class="ci-icon">🏃</div><div class="ci-name">锻炼身体</div>
-      <div class="ci-status" id="ci-status-exercise">⬜ 未完成</div>
-      <div class="ci-total">累计 <span id="ci-total-exercise">0</span> 天</div>
-    </div>
-    <div class="checkin-card" id="ci-finance" onclick="checkin('finance')">
-      <div class="ci-icon">💰</div><div class="ci-name">理财学习</div>
-      <div class="ci-status" id="ci-status-finance">⬜ 未完成</div>
-      <div class="ci-total">累计 <span id="ci-total-finance">0</span> 天</div>
-    </div>
-    <div class="checkin-card" id="ci-schedule" onclick="checkin('schedule')">
-      <div class="ci-icon">📅</div><div class="ci-name">日程执行</div>
-      <div class="ci-status" id="ci-status-schedule">⬜ 未完成</div>
-      <div class="ci-total">累计 <span id="ci-total-schedule">0</span> 天</div>
-    </div>
-  </div>
-
-  <div class="card sage">
-    <h3>🐸 今日三只青蛙</h3>
-    <div class="frog-list" id="dashboardFrogs">
-      <div class="frog-card"><div class="frog-num">🐸1</div><div class="frog-info"><div class="frog-label" contenteditable="true">_________</div><div class="frog-meta">验收产出：<span contenteditable="true">_________</span></div></div></div>
-      <div class="frog-card"><div class="frog-num">🐸2</div><div class="frog-info"><div class="frog-label" contenteditable="true">_________</div><div class="frog-meta">验收产出：<span contenteditable="true">_________</span></div></div></div>
-      <div class="frog-card"><div class="frog-num">🐸3</div><div class="frog-info"><div class="frog-label" contenteditable="true">_________</div><div class="frog-meta">验收产出：<span contenteditable="true">_________</span></div></div></div>
-    </div>
+  <h3 style="margin-bottom:10px">📊 今日打卡</h3>
+  <div class="checkin-grid" id="checkinGrid"></div>
+  <h3 style="margin:18px 0 10px">🚀 快速跳转</h3>
+  <div class="quick-grid">
+    <div class="quick-card" onclick="switchPage('exercise')" style="border-left:3px solid var(--sage)"><div class="quick-icon">🏃</div><div class="quick-name">塑形训练</div></div>
+    <div class="quick-card" onclick="switchPage('english')" style="border-left:3px solid var(--rose)"><div class="quick-icon">📗</div><div class="quick-name">英语学习</div></div>
+    <div class="quick-card" onclick="switchPage('finance')" style="border-left:3px solid var(--gold)"><div class="quick-icon">💰</div><div class="quick-name">理财教学</div></div>
+    <div class="quick-card" onclick="switchPage('shopify')" style="border-left:3px solid var(--sky)"><div class="quick-icon">🛒</div><div class="quick-name">Shopify技能</div></div>
   </div>
 </div>
 
-<!-- ====== 英语学习 ====== -->
-<div class="page-content" id="page-english">
-  <div class="section-header"><h1>📗 英语学习</h1><span class="tag">老师式每日自动学习</span></div>
-  <blockquote>目标：外企面试、商务读写、日常交流、出国旅游。工作日约60分钟，周末40分钟。</blockquote>
-  
-  <div id="englishContent"><div class="card rose">
-  <h3>📗 今日英语学习 · <span id="engDayLabel">周一</span></h3>
-  <div class="info-row"><span class="info-label">学习主题</span><span class="info-value" id="engTopic">商务职场核心单词</span></div>
-  <div class="info-row"><span class="info-label">具体任务</span><span class="info-value" id="engTask">抄写记忆岗位、邮件、工作沟通相关词汇</span></div>
-  <div class="info-row"><span class="info-label">建议时长</span><span class="info-value" id="engDuration">60min</span></div>
-  <div class="info-row"><span class="info-label">产出要求</span><span class="info-value" id="engOutput">抄写记录+词汇笔记</span></div>
-</div></div>
-
-  <details>
-    <summary>📚 素材库</summary>
-    <div class="detail-content">
-      <h4>面试题库</h4>
-      <p>Tell me about yourself. / Why do you want this job? / What are your strengths? / Where do you see yourself in 5 years? / Describe a challenge you faced. / Why should we hire you?</p>
-      <h4 style="margin-top:10px">商务单词库</h4>
-      <p>invoice 发票 · quotation 报价 · shipment 装运 · logistics 物流 · procurement 采购 · negotiation 谈判 · compliance 合规 · stakeholder 利益相关者</p>
-      <h4 style="margin-top:10px">旅游句型</h4>
-      <p>Could you help me? / How much is this? / Where is the nearest...? / I'd like to book a room. / Can I have the menu? / What time does the train leave?</p>
-    </div>
-  </details>
-
-  <div class="card dust">
-    <h4>📝 错题生词记录本</h4>
-    <div contenteditable="true" style="min-height:80px;padding:8px;border:1px solid var(--border-light);border-radius:var(--radius-sm);font-size:.82rem;color:var(--text-secondary)" id="engWrongWords">记录不会的词句...</div>
+<!-- 塑形训练 -->
+<div class="page" id="page-exercise">
+  <div class="stage-badge sage" id="exStageBadge">加载中...</div>
+  <h1>🏃 塑形训练看板</h1>
+  <div class="progress-wrap" id="exProgress"></div>
+  <div id="exContent"></div>
+  <div class="card sage"><h4>📝 身体感受记录</h4><textarea class="note-area" id="exBodyLog" placeholder="记录今日训练感受：酸痛程度、疲劳感、动作完成质量..." oninput="autoSave()"></textarea></div>
+  <div class="card sage"><h4>📏 月度围度统计</h4>
+    <div class="table-wrap"><table><thead><tr><th>日期</th><th>腰围</th><th>臀围</th><th>手臂</th><th>大腿</th><th>体重</th></tr></thead>
+    <tbody id="exMeasurements"><tr><td contenteditable="true">日期</td><td contenteditable="true">cm</td><td contenteditable="true">cm</td><td contenteditable="true">cm</td><td contenteditable="true">cm</td><td contenteditable="true">kg</td></tr></tbody></table></div>
   </div>
+  <div style="display:flex;gap:10px;margin-top:16px"><button class="btn checkin-btn" id="exCheckinBtn" onclick="doCheckin('exercise')">✅ 训练打卡</button></div>
+</div>
 
-  <div style="display:flex;gap:10px;align-items:center;margin-top:12px">
-    <button class="btn primary" onclick="checkin('english')">✅ 今日英语打卡完成</button>
-    <span style="font-size:.82rem;color:var(--text-muted)">累计学习 <strong id="engTotalDays">0</strong> 天</span>
+<!-- 英语学习 -->
+<div class="page" id="page-english">
+  <div class="stage-badge rose" id="enStageBadge">加载中...</div>
+  <h1>📗 英语学习看板</h1>
+  <div class="progress-wrap" id="enProgress"></div>
+  <div id="enContent"></div>
+  <div class="card rose"><h4>📝 错题与生词记录</h4><textarea class="note-area" id="enWrongWords" placeholder="记录不会的单词、做错的题目..." oninput="autoSave()"></textarea></div>
+  <div style="display:flex;gap:10px;margin-top:16px"><button class="btn checkin-btn" id="enCheckinBtn" onclick="doCheckin('english')">✅ 学习打卡</button></div>
+</div>
+
+<!-- 理财教学 -->
+<div class="page" id="page-finance">
+  <div class="stage-badge gold" id="fiStageBadge">加载中...</div>
+  <h1>💰 理财教学看板</h1>
+  <div class="progress-wrap" id="fiProgress"></div>
+  <div id="fiContent"></div>
+  <div class="card gold"><h4>📝 知识点收藏</h4><textarea class="note-area" id="fiSavedNotes" placeholder="收藏重要知识点、个人感悟..." oninput="autoSave()"></textarea></div>
+  <div class="disclaimer">⚠️ 全部内容仅做知识科普，不构成任何投资建议。</div>
+  <div style="display:flex;gap:10px;margin-top:16px"><button class="btn checkin-btn" id="fiCheckinBtn" onclick="doCheckin('finance')">✅ 学习打卡</button></div>
+</div>
+
+<!-- Shopify技能 -->
+<div class="page" id="page-shopify">
+  <div class="stage-badge sky" id="shStageBadge">加载中...</div>
+  <h1>🛒 Shopify跨境技能看板</h1>
+  <div class="progress-wrap" id="shProgress"></div>
+  <div id="shContent"></div>
+  <div class="card sky"><h4>📝 店铺优化动作记录</h4><textarea class="note-area" id="shActionLog" placeholder="记录今日店铺优化动作、改动截图说明..." oninput="autoSave()"></textarea></div>
+  <div class="disclaimer">🚫 全程零广告预算 · 聚焦宠物纪念数字+POD定制 · 不含订阅费用记账</div>
+  <div style="display:flex;gap:10px;margin-top:16px"><button class="btn checkin-btn" id="shCheckinBtn" onclick="doCheckin('shopify')">✅ 学习打卡</button></div>
+</div>
+
+<!-- 帮助区域 -->
+<div class="help-box">
+  <h3>📋 调用说明</h3>
+  <p class="muted" style="font-size:.8rem;margin-bottom:8px">使用以下指令快速操作工作台：</p>
+  <div style="font-size:.8rem;line-height:2">
+    <strong>切换看板：</strong><span class="help-cmd">打开英语学习看板</span><span class="help-cmd">打开塑形训练看板</span><span class="help-cmd">打开理财教学看板</span><span class="help-cmd">打开Shopify技能看板</span><br>
+    <strong>打卡：</strong><span class="help-cmd">英语学习打卡</span><span class="help-cmd">塑形训练打卡</span><span class="help-cmd">理财学习打卡</span><span class="help-cmd">Shopify学习打卡</span><br>
+    <strong>刷新：</strong><span class="help-cmd">刷新今日内容</span>
   </div>
 </div>
 
-<!-- ====== 锻炼身体 ====== -->
-<div class="page-content" id="page-exercise">
-  <div class="section-header"><h1>🏃 锻炼身体</h1><span class="tag">训练窗口 09:00-11:00</span></div>
-  
-  <div class="card rose">
-    <h3>💪 个人基础</h3>
-    <div class="info-row"><span class="info-label">身高体重</span><span class="info-value">157cm / 45kg</span></div>
-    <div class="info-row"><span class="info-label">目标</span><span class="info-value">马甲线 + 全身塑形，紧致线条，拒绝大块肌肉</span></div>
-    <div class="info-row"><span class="info-label">器械</span><span class="info-value">3kg、5kg、10kg哑铃各一对 + 弹力带</span></div>
-    <div class="info-row"><span class="info-label">训练窗口</span><span class="info-value">固定 09:00-11:00，不占用下午工作时段</span></div>
-  </div>
-
-  <div class="card sage">
-    <h3>📋 每周训练循环计划</h3>
-    <div class="table-wrap"><table>
-      <thead><tr><th>星期</th><th>训练内容</th><th>动作明细</th></tr></thead>
-      <tbody>
-        <tr><td>周一</td><td>肩背力量 + 可选有氧</td><td contenteditable="true">哑铃划船 3x12、侧平举 3x12、俯身飞鸟 3x12 + 有氧20min</td></tr>
-        <tr><td>周二</td><td>臀腿塑形 + 可选有氧</td><td contenteditable="true">哑铃深蹲 3x15、臀桥 3x15、弹力带侧走 3x12 + 有氧20min</td></tr>
-        <tr><td>周三</td><td>核心腹部马甲线 + 有氧</td><td contenteditable="true">平板支撑 3x30s、卷腹 3x15、俄罗斯转体 3x20 + 有氧30min</td></tr>
-        <tr><td>周四</td><td>手臂塑形 + 可选有氧</td><td contenteditable="true">哑铃弯举 3x12、臂屈伸 3x12、弹力带拉伸 3x15 + 有氧20min</td></tr>
-        <tr><td>周五</td><td>全身综合 + 有氧</td><td contenteditable="true">上述动作任选4个组合 + 有氧30min</td></tr>
-        <tr><td>周六</td><td>轻量拉伸/休息</td><td contenteditable="true">全身拉伸放松</td></tr>
-        <tr><td>周日</td><td>休息</td><td contenteditable="true">完全休息</td></tr>
-      </tbody>
-    </table></div>
-  </div>
-
-  <blockquote>训练规则：单次30-60分钟；周一至周五每周2-3次有氧，其余力量训练；允许同天力量+有氧；难度平缓进阶。</blockquote>
-
-  <div class="tip-box">
-    <div class="tip-title">🥗 配套温和饮食提示（适配备孕前期）</div>
-    多摄入优质蛋白：鸡蛋、鱼肉、鸡胸、豆制品。运动后补充碳水+蛋白。每天饮水1.5-2L。避免极端节食。以上仅为温和参考，不做医疗饮食诊断。
-  </div>
-
-  <div style="display:flex;gap:10px;align-items:center;margin-top:12px">
-    <button class="btn primary" onclick="checkin('exercise')">✅ 今日锻炼打卡完成</button>
-    <span style="font-size:.82rem;color:var(--text-muted)">累计运动 <strong id="exTotalDays">0</strong> 天</span>
-  </div>
-</div>
-
-<!-- ====== 理财学习 ====== -->
-<div class="page-content" id="page-finance">
-  <div class="section-header"><h1>💰 理财学习</h1><span class="tag">零基础入门 · 知识科普</span></div>
-  <blockquote>定位：零基础入门，重点个人家庭基础理财认知、副业收支思维、分清资产负债。适配备孕阶段家庭财务规划。</blockquote>
-  
-  <div id="financeContent"><div class="card rose">
-  <h3>💰 今日理财学习 · <span id="finDayLabel">周一</span></h3>
-  <div class="info-row"><span class="info-label">学习主题</span><span class="info-value" id="finTopic">基础理财概念科普</span></div>
-  <div class="info-row"><span class="info-label">具体任务</span><span class="info-value" id="finTask">学习收入、支出、资产、负债基本概念</span></div>
-  <div class="info-row"><span class="info-label">建议时长</span><span class="info-value" id="finDuration">30min</span></div>
-  <div class="info-row"><span class="info-label">产出要求</span><span class="info-value" id="finOutput">概念笔记</span></div>
-</div></div>
-
-  <div class="warning-box">全部内容仅做知识科普，<strong>不构成任何投资建议</strong>。</div>
-
-  <div class="card dust">
-    <h4>📝 理财知识库碎片笔记</h4>
-    <div contenteditable="true" style="min-height:80px;padding:8px;border:1px solid var(--border-light);border-radius:var(--radius-sm);font-size:.82rem;color:var(--text-secondary)" id="finKnowledgeBase">记录理财学习要点...</div>
-  </div>
-
-  <div style="display:flex;gap:10px;align-items:center;margin-top:12px">
-    <button class="btn primary" onclick="checkin('finance')">✅ 今日理财打卡完成</button>
-    <span style="font-size:.82rem;color:var(--text-muted)">累计学习 <strong id="finTotalDays">0</strong> 天</span>
-  </div>
-</div>
-
-<!-- ====== 每日日程计划 ====== -->
-<div class="page-content" id="page-schedule">
-  <div class="section-header"><h1>📅 每日日程计划</h1></div>
-
-  <div class="mode-selector">
-    <button class="mode-btn selected" onclick="selectMode('full')">📋 工作日完整版<span class="mode-hint">状态正常</span></button>
-    <button class="mode-btn" onclick="selectMode('min')">📋 最低容错版<span class="mode-hint">状态差/只保底线</span></button>
-    <button class="mode-btn" onclick="selectMode('weekend')">📋 周末聚会版<span class="mode-hint">任务减半</span></button>
-  </div>
-
-  <div class="card lavender">
-    <h3>⏰ 作息底线（不可侵犯）</h3>
-    <div class="time-block"><span class="time">08:30</span><span class="task-name">起床</span></div>
-    <div class="time-block rest"><span class="time">09:00 — 11:00</span><span class="task-name">运动 + 早饭（上午完全不排任务）</span></div>
-    <div class="time-block rest"><span class="time">11:00 — 12:30</span><span class="task-name">午饭休息</span></div>
-    <div class="time-block"><span class="time">12:30 — 22:30</span><span class="task-name">下午可工作学习时段</span></div>
-    <div class="time-block"><span class="time">22:30</span><span class="task-name">睡觉</span></div>
-  </div>
-
-  <!-- 模式一：工作日完整版 -->
-  <div class="schedule-mode" id="modeFull" style="border-left:3px solid var(--accent-sage)">
-    <div class="mode-title">📋 模式一 · 工作日完整版 <span class="mode-badge full">周一~周五</span></div>
-    <div style="display:flex;gap:4px;margin-bottom:14px;flex-wrap:wrap" id="weekdayTabs">
-      <button class="day-tab selected" onclick="switchDay('mon')">周一</button>
-      <button class="day-tab" onclick="switchDay('tue')">周二</button>
-      <button class="day-tab" onclick="switchDay('wed')">周三</button>
-      <button class="day-tab" onclick="switchDay('thu')">周四</button>
-      <button class="day-tab" onclick="switchDay('fri')">周五</button>
-    </div>
-    <div class="day-panel active" id="panel-mon" style="display:block">
-  <h4>① 今日3只高价值青蛙</h4>
-  <div class="frog-list"><div class="frog-card"><div class="frog-num">🐸1</div><div class="frog-info"><div class="frog-label" contenteditable="true">Shopify竞品调研文档</div><div class="frog-meta">验收产出：<span contenteditable="true">_________</span></div></div></div>
-<div class="frog-card"><div class="frog-num">🐸2</div><div class="frog-info"><div class="frog-label" contenteditable="true">英语面试问答抄写5题</div><div class="frog-meta">验收产出：<span contenteditable="true">_________</span></div></div></div>
-<div class="frog-card"><div class="frog-num">🐸3</div><div class="frog-info"><div class="frog-label" contenteditable="true">求职岗位关键词整理</div><div class="frog-meta">验收产出：<span contenteditable="true">_________</span></div></div></div></div>
-  <h4 style="margin-top:16px">② 下午+晚间任务排布</h4>
-  <div class="time-block"><span class="time">13:00 — 14:00</span><span class="task-name">Shopify：Ins宠物画POD竞品调研</span><span class="task-duration">60min</span><span class="task-output">文档记录3个竞品优点+2个可借鉴点</span></div>
-<div class="time-block"><span class="time">14:10 — 15:10</span><span class="task-name">英语：外企面试高频问答抄写5题，记忆职场岗位词汇</span><span class="task-duration">60min</span><span class="task-output">抄写记录+词汇笔记</span></div>
-<div class="time-block"><span class="time">15:20 — 16:20</span><span class="task-name">求职调研：整理跨境运营助理/单证专员/外贸助理岗位要求</span><span class="task-duration">60min</span><span class="task-output">岗位关键词清单+技能差距记录</span></div>
-<div class="time-block"><span class="time">16:30 — 17:20</span><span class="task-name">技能学习：跨境独立站课程片段学习</span><span class="task-duration">50min</span><span class="task-output">2条书面笔记</span></div>
-<div class="time-block"><span class="time">17:20 — 18:00</span><span class="task-name">轻复盘：记录完成/未完成，写下明天第一件优先任务</span><span class="task-duration">40min</span><span class="task-output">复盘记录</span></div>
-<div class="time-block"><span class="time">19:30 — 20:20</span><span class="task-name">Shopify：优化1个宠物画产品详情页</span><span class="task-duration">50min</span><span class="task-output">修改后版本</span></div>
-<div class="time-block"><span class="time">20:30 — 21:20</span><span class="task-name">英语：外贸外企短篇阅读，摘抄可用句式</span><span class="task-duration">50min</span><span class="task-output">摘抄笔记</span></div>
-<div class="time-block"><span class="time">21:20 — 21:40</span><span class="task-name">预览次日任务</span><span class="task-duration">20min</span><span class="task-output">明日任务清单</span></div>
-  <h4 style="margin-top:16px">③ 产出验收标准</h4>
-  <div class="table-wrap"><table><thead><tr><th>产出物</th><th>是否完成</th></tr></thead><tbody>
-    <tr><td contenteditable="true">_________</td><td contenteditable="true">⬜</td></tr>
-    <tr><td contenteditable="true">_________</td><td contenteditable="true">⬜</td></tr>
-    <tr><td contenteditable="true">_________</td><td contenteditable="true">⬜</td></tr>
-  </tbody></table></div>
-</div><div class="day-panel active" id="panel-tue" style="display:none">
-  <h4>① 今日3只高价值青蛙</h4>
-  <div class="frog-list"><div class="frog-card"><div class="frog-num">🐸1</div><div class="frog-info"><div class="frog-label" contenteditable="true">Ins Reels完整脚本撰写</div><div class="frog-meta">验收产出：<span contenteditable="true">_________</span></div></div></div>
-<div class="frog-card"><div class="frog-num">🐸2</div><div class="frog-info"><div class="frog-label" contenteditable="true">简历迭代更新</div><div class="frog-meta">验收产出：<span contenteditable="true">_________</span></div></div></div>
-<div class="frog-card"><div class="frog-num">🐸3</div><div class="frog-info"><div class="frog-label" contenteditable="true">商务读写句型5组</div><div class="frog-meta">验收产出：<span contenteditable="true">_________</span></div></div></div></div>
-  <h4 style="margin-top:16px">② 下午+晚间任务排布</h4>
-  <div class="time-block"><span class="time">13:00 — 14:00</span><span class="task-name">Shopify：撰写1条Ins Reels完整脚本文本</span><span class="task-duration">60min</span><span class="task-output">Reels脚本文档</span></div>
-<div class="time-block"><span class="time">14:10 — 15:10</span><span class="task-name">英语：复习周一面试问答，新增5组商务读写句型</span><span class="task-duration">60min</span><span class="task-output">复习记录+新句型笔记</span></div>
-<div class="time-block"><span class="time">15:20 — 16:20</span><span class="task-name">求职：迭代一版简历，匹配筛选出的岗位要求</span><span class="task-duration">60min</span><span class="task-output">更新后简历</span></div>
-<div class="time-block"><span class="time">16:30 — 17:20</span><span class="task-name">技能学习：POD模式知识点</span><span class="task-duration">50min</span><span class="task-output">书面笔记</span></div>
-<div class="time-block"><span class="time">17:20 — 18:00</span><span class="task-name">轻复盘</span><span class="task-duration">40min</span><span class="task-output">复盘记录</span></div>
-<div class="time-block"><span class="time">19:30 — 20:20</span><span class="task-name">Shopify：检查店铺页面bug与排版</span><span class="task-duration">50min</span><span class="task-output">问题清单+修复记录</span></div>
-<div class="time-block"><span class="time">20:30 — 21:20</span><span class="task-name">英语：写一小段模拟面试自我介绍短文</span><span class="task-duration">50min</span><span class="task-output">自我介绍短文</span></div>
-<div class="time-block"><span class="time">21:20 — 21:40</span><span class="task-name">预览次日任务</span><span class="task-duration">20min</span><span class="task-output">明日任务清单</span></div>
-  <h4 style="margin-top:16px">③ 产出验收标准</h4>
-  <div class="table-wrap"><table><thead><tr><th>产出物</th><th>是否完成</th></tr></thead><tbody>
-    <tr><td contenteditable="true">_________</td><td contenteditable="true">⬜</td></tr>
-    <tr><td contenteditable="true">_________</td><td contenteditable="true">⬜</td></tr>
-    <tr><td contenteditable="true">_________</td><td contenteditable="true">⬜</td></tr>
-  </tbody></table></div>
-</div><div class="day-panel active" id="panel-wed" style="display:none">
-  <h4>① 今日3只高价值青蛙</h4>
-  <div class="frog-list"><div class="frog-card"><div class="frog-num">🐸1</div><div class="frog-info"><div class="frog-label" contenteditable="true">Reels半成品剪辑导出</div><div class="frog-meta">验收产出：<span contenteditable="true">_________</span></div></div></div>
-<div class="frog-card"><div class="frog-num">🐸2</div><div class="frog-info"><div class="frog-label" contenteditable="true">筛选5个优质岗位清单</div><div class="frog-meta">验收产出：<span contenteditable="true">_________</span></div></div></div>
-<div class="frog-card"><div class="frog-num">🐸3</div><div class="frog-info"><div class="frog-label" contenteditable="true">面试情景模拟练习</div><div class="frog-meta">验收产出：<span contenteditable="true">_________</span></div></div></div></div>
-  <h4 style="margin-top:16px">② 下午+晚间任务排布</h4>
-  <div class="time-block"><span class="time">13:00 — 14:00</span><span class="task-name">Shopify：基于周二脚本，剪出Reels半成品草稿并导出</span><span class="task-duration">60min</span><span class="task-output">Reels半成品导出文件</span></div>
-<div class="time-block"><span class="time">14:10 — 15:10</span><span class="task-name">英语：面试情景模拟，口头作答可录音</span><span class="task-duration">60min</span><span class="task-output">录音文件或笔记</span></div>
-<div class="time-block"><span class="time">15:20 — 16:20</span><span class="task-name">求职：筛选5个符合"有成长不过度劳累非销售"岗位</span><span class="task-duration">60min</span><span class="task-output">岗位清单表格</span></div>
-<div class="time-block"><span class="time">16:30 — 17:20</span><span class="task-name">技能学习：独立站产品文案写作要点</span><span class="task-duration">50min</span><span class="task-output">笔记</span></div>
-<div class="time-block"><span class="time">17:20 — 18:00</span><span class="task-name">轻复盘</span><span class="task-duration">40min</span><span class="task-output">复盘记录</span></div>
-<div class="time-block"><span class="time">19:30 — 20:20</span><span class="task-name">Shopify：优化店铺首页局部模块</span><span class="task-duration">50min</span><span class="task-output">优化前后对比</span></div>
-<div class="time-block"><span class="time">20:30 — 21:20</span><span class="task-name">英语阅读：积累描述个人能力英文句子</span><span class="task-duration">50min</span><span class="task-output">句子摘抄</span></div>
-<div class="time-block"><span class="time">21:20 — 21:40</span><span class="task-name">预览次日任务</span><span class="task-duration">20min</span><span class="task-output">明日任务清单</span></div>
-  <h4 style="margin-top:16px">③ 产出验收标准</h4>
-  <div class="table-wrap"><table><thead><tr><th>产出物</th><th>是否完成</th></tr></thead><tbody>
-    <tr><td contenteditable="true">_________</td><td contenteditable="true">⬜</td></tr>
-    <tr><td contenteditable="true">_________</td><td contenteditable="true">⬜</td></tr>
-    <tr><td contenteditable="true">_________</td><td contenteditable="true">⬜</td></tr>
-  </tbody></table></div>
-</div><div class="day-panel active" id="panel-thu" style="display:none">
-  <h4>① 今日3只高价值青蛙</h4>
-  <div class="frog-list"><div class="frog-card"><div class="frog-num">🐸1</div><div class="frog-info"><div class="frog-label" contenteditable="true">宠物画新产品变体构思</div><div class="frog-meta">验收产出：<span contenteditable="true">_________</span></div></div></div>
-<div class="frog-card"><div class="frog-num">🐸2</div><div class="frog-info"><div class="frog-label" contenteditable="true">投递2个优质岗位</div><div class="frog-meta">验收产出：<span contenteditable="true">_________</span></div></div></div>
-<div class="frog-card"><div class="frog-num">🐸3</div><div class="frog-info"><div class="frog-label" contenteditable="true">Ins自然流量方法笔记</div><div class="frog-meta">验收产出：<span contenteditable="true">_________</span></div></div></div></div>
-  <h4 style="margin-top:16px">② 下午+晚间任务排布</h4>
-  <div class="time-block"><span class="time">13:00 — 14:00</span><span class="task-name">Shopify：构思2个宠物画新产品变体想法</span><span class="task-duration">60min</span><span class="task-output">产品变体文档</span></div>
-<div class="time-block"><span class="time">14:10 — 15:10</span><span class="task-name">英语：复习本周单词、问答，查漏补缺</span><span class="task-duration">60min</span><span class="task-output">复习记录</span></div>
-<div class="time-block"><span class="time">15:20 — 16:20</span><span class="task-name">求职：最多投递2个优质筛选岗位，更新求职投递台账</span><span class="task-duration">60min</span><span class="task-output">投递台账更新</span></div>
-<div class="time-block"><span class="time">16:30 — 17:20</span><span class="task-name">技能学习：Ins免费自然流量方法</span><span class="task-duration">50min</span><span class="task-output">2个可执行点笔记</span></div>
-<div class="time-block"><span class="time">17:20 — 18:00</span><span class="task-name">轻复盘</span><span class="task-duration">40min</span><span class="task-output">复盘记录</span></div>
-<div class="time-block"><span class="time">19:30 — 20:20</span><span class="task-name">Shopify：完善Reels视频并发布</span><span class="task-duration">50min</span><span class="task-output">发布链接</span></div>
-<div class="time-block"><span class="time">20:30 — 21:20</span><span class="task-name">英语：仿写一小段Shopify产品英文描述</span><span class="task-duration">50min</span><span class="task-output">仿写文本</span></div>
-<div class="time-block"><span class="time">21:20 — 21:40</span><span class="task-name">预览次日任务</span><span class="task-duration">20min</span><span class="task-output">明日任务清单</span></div>
-  <h4 style="margin-top:16px">③ 产出验收标准</h4>
-  <div class="table-wrap"><table><thead><tr><th>产出物</th><th>是否完成</th></tr></thead><tbody>
-    <tr><td contenteditable="true">_________</td><td contenteditable="true">⬜</td></tr>
-    <tr><td contenteditable="true">_________</td><td contenteditable="true">⬜</td></tr>
-    <tr><td contenteditable="true">_________</td><td contenteditable="true">⬜</td></tr>
-  </tbody></table></div>
-</div><div class="day-panel active" id="panel-fri" style="display:none">
-  <h4>① 今日3只高价值青蛙</h4>
-  <div class="frog-list"><div class="frog-card"><div class="frog-num">🐸1</div><div class="frog-info"><div class="frog-label" contenteditable="true">本周数据复盘观察</div><div class="frog-meta">验收产出：<span contenteditable="true">_________</span></div></div></div>
-<div class="frog-card"><div class="frog-num">🐸2</div><div class="frog-info"><div class="frog-label" contenteditable="true">英语总复习整理</div><div class="frog-meta">验收产出：<span contenteditable="true">_________</span></div></div></div>
-<div class="frog-card"><div class="frog-num">🐸3</div><div class="frog-info"><div class="frog-label" contenteditable="true">周末任务规划</div><div class="frog-meta">验收产出：<span contenteditable="true">_________</span></div></div></div></div>
-  <h4 style="margin-top:16px">② 下午+晚间任务排布</h4>
-  <div class="time-block"><span class="time">13:00 — 14:00</span><span class="task-name">Shopify：复盘本周店铺与Reels自然浏览数据，写下3条观察</span><span class="task-duration">60min</span><span class="task-output">数据观察文档</span></div>
-<div class="time-block"><span class="time">14:10 — 15:10</span><span class="task-name">英语：本周英语总复习，整理不会的句子与单词</span><span class="task-duration">60min</span><span class="task-output">复习整理笔记</span></div>
-<div class="time-block"><span class="time">15:20 — 16:20</span><span class="task-name">求职：更新求职台账，整理面试问题清单</span><span class="task-duration">60min</span><span class="task-output">台账+问题清单</span></div>
-<div class="time-block rest"><span class="time">16:30 — 17:20</span><span class="task-name">自由补强：三选一补短板（英语/Shopify/简历）</span><span class="task-duration">50min</span><span class="task-output">补强产出</span></div>
-<div class="time-block"><span class="time">17:20 — 18:00</span><span class="task-name">周中小结：写下本周忙碌但无产出事项，标记下周要砍掉</span><span class="task-duration">40min</span><span class="task-output">小结记录</span></div>
-<div class="time-block"><span class="time">19:30 — 20:30</span><span class="task-name">低压力休闲浏览行业信息</span><span class="task-duration">60min</span><span class="task-output">不安排高强度任务</span></div>
-<div class="time-block"><span class="time">20:30 — 21:40</span><span class="task-name">规划周末少量任务</span><span class="task-duration">70min</span><span class="task-output">周末任务清单</span></div>
-  <h4 style="margin-top:16px">③ 产出验收标准</h4>
-  <div class="table-wrap"><table><thead><tr><th>产出物</th><th>是否完成</th></tr></thead><tbody>
-    <tr><td contenteditable="true">_________</td><td contenteditable="true">⬜</td></tr>
-    <tr><td contenteditable="true">_________</td><td contenteditable="true">⬜</td></tr>
-    <tr><td contenteditable="true">_________</td><td contenteditable="true">⬜</td></tr>
-  </tbody></table></div>
-</div>
-  </div>
-
-  <!-- 模式二：最低容错版 -->
-  <div class="schedule-mode" id="modeMin" style="display:none;border-left:3px solid var(--accent-lavender)">
-    <div class="mode-title">📋 模式二 · 最低容错版 <span class="mode-badge min">状态差 / 只保底线</span></div>
-    <blockquote>任意状态不好的工作日，只做3项，其余全部放弃。不内疚，不补任务。</blockquote>
-    <div class="time-block"><span class="time">13:00 — 13:40</span><span class="task-name">英语40分钟：只复习旧内容，不学新内容</span><span class="task-duration">40min</span><span class="task-output">复习记录</span></div>
-    <div class="time-block"><span class="time">13:50 — 14:20</span><span class="task-name">Shopify 30分钟：修改一处文字 或 构思选题</span><span class="task-duration">30min</span><span class="task-output">简单产出</span></div>
-    <div class="time-block"><span class="time">14:20 — 14:35</span><span class="task-name">15分钟记录：记下今日需规避的无效事项</span><span class="task-duration">15min</span><span class="task-output">规避清单</span></div>
-    <div class="time-block rest"><span class="time">14:35 之后</span><span class="task-name">自由休息，不补任务</span></div>
-    <blockquote style="margin-top:12px">💡 连续两天启用最低容错版 = 负荷过高，需要下调任务总量。</blockquote>
-  </div>
-
-  <!-- 模式三：周末聚会版 -->
-  <div class="schedule-mode" id="modeWeekend" style="display:none;border-left:3px solid var(--accent-sky)">
-    <div class="mode-title">📋 模式三 · 周末聚会容错版 <span class="mode-badge weekend">周六日 · 任务减半</span></div>
-    <div style="display:flex;gap:4px;margin-bottom:14px;flex-wrap:wrap" id="weekendTabs">
-      <button class="day-tab selected" onclick="switchDay('sat')">周六</button>
-      <button class="day-tab" onclick="switchDay('sun')">周日</button>
-    </div>
-    <div class="day-panel active" id="panel-sat" style="display:block">
-  <h4>① 今日青蛙（周末轻量）</h4>
-  <div class="frog-list"><div class="frog-card"><div class="frog-num">🐸1</div><div class="frog-info"><div class="frog-label" contenteditable="true">英语单词复习+阅读</div><div class="frog-meta">验收产出：<span contenteditable="true">_________</span></div></div></div>
-<div class="frog-card"><div class="frog-num">🐸2</div><div class="frog-info"><div class="frog-label" contenteditable="true">下周Reels选题构思</div><div class="frog-meta">验收产出：<span contenteditable="true">_________</span></div></div></div>
-<div class="frog-card"><div class="frog-num">🐸3</div><div class="frog-info"><div class="frog-label" contenteditable="true">_________</div><div class="frog-meta">验收产出：<span contenteditable="true">_________</span></div></div></div></div>
-  <h4 style="margin-top:16px">② 下午任务排布</h4>
-  <div class="time-block"><span class="time">13:00 — 13:40</span><span class="task-name">英语：复习本周单词+短篇阅读</span><span class="task-duration">40min</span><span class="task-output">阅读标记</span></div>
-<div class="time-block"><span class="time">13:50 — 14:50</span><span class="task-name">Shopify：构思下周2条Reels选题写入文档</span><span class="task-duration">60min</span><span class="task-output">选题文档</span></div>
-  <h4 style="margin-top:16px">③ 产出验收标准</h4>
-  <div class="table-wrap"><table><thead><tr><th>产出物</th><th>是否完成</th></tr></thead><tbody>
-    <tr><td contenteditable="true">_________</td><td contenteditable="true">⬜</td></tr>
-    <tr><td contenteditable="true">_________</td><td contenteditable="true">⬜</td></tr>
-  </tbody></table></div>
-</div><div class="day-panel active" id="panel-sun" style="display:none">
-  <h4>① 今日青蛙（周末轻量）</h4>
-  <div class="frog-list"><div class="frog-card"><div class="frog-num">🐸1</div><div class="frog-info"><div class="frog-label" contenteditable="true">英语自我介绍口语练习</div><div class="frog-meta">验收产出：<span contenteditable="true">_________</span></div></div></div>
-<div class="frog-card"><div class="frog-num">🐸2</div><div class="frog-info"><div class="frog-label" contenteditable="true">标准周复盘执行</div><div class="frog-meta">验收产出：<span contenteditable="true">_________</span></div></div></div>
-<div class="frog-card"><div class="frog-num">🐸3</div><div class="frog-info"><div class="frog-label" contenteditable="true">_________</div><div class="frog-meta">验收产出：<span contenteditable="true">_________</span></div></div></div></div>
-  <h4 style="margin-top:16px">② 下午任务排布</h4>
-  <div class="time-block"><span class="time">13:00 — 13:40</span><span class="task-name">英语：面试自我介绍口语练习</span><span class="task-duration">40min</span><span class="task-output">口语练习录音</span></div>
-<div class="time-block"><span class="time">13:50 — 14:50</span><span class="task-name">执行工作台标准周复盘</span><span class="task-duration">60min</span><span class="task-output">周复盘记录</span></div>
-  <h4 style="margin-top:16px">③ 产出验收标准</h4>
-  <div class="table-wrap"><table><thead><tr><th>产出物</th><th>是否完成</th></tr></thead><tbody>
-    <tr><td contenteditable="true">_________</td><td contenteditable="true">⬜</td></tr>
-    <tr><td contenteditable="true">_________</td><td contenteditable="true">⬜</td></tr>
-  </tbody></table></div>
-</div>
-  </div>
-
-  <div class="card lavender">
-    <h3>🔄 调用规则</h3>
-    <ol style="font-size:.82rem;padding-left:18px;color:var(--text-secondary);display:flex;flex-direction:column;gap:4px">
-      <li>用户每日输入指令示例：<code>读取工作台，执行今日日程，今天是周一，状态正常</code></li>
-      <li>遇到出门买东西、丢垃圾、琐事打断，任务没做完不要熬夜补，直接跳过，不产生负罪感。</li>
-      <li>评判完成度看「是否完成动作产出」，不看订单、面试结果。</li>
-      <li>连续两天启用最低容错版代表负荷过高，需要下调任务总量。</li>
-      <li>每周日强制运行周复盘，删除无效忙碌事项，解决忙而无结果。</li>
-    </ol>
-  </div>
-</div>
-
-<!-- ====== 技能提升看板 ====== -->
-<div class="page-content" id="page-skills">
-  <div class="section-header"><h1>💼 技能提升项目看板</h1><span class="tag">最高权重 10分</span></div>
-  <blockquote>弥补学历短板，积累可复用能力。所有任务必须有可见产出。</blockquote>
-  
-  <div class="card rose">
-    <h3>📌 技能提升</h3>
-    <div class="kanban-grid">
-      <div class="kanban-item">
-        <h4>A1 · 英语能力</h4>
-        <div class="field-row"><span class="field-label">当前现状</span><span class="field-value" contenteditable="true">正在重拾英语，目标外企面试+读写+出国旅游</span></div>
-        <div class="field-row"><span class="field-label">本周行动</span><span class="field-value" contenteditable="true">① 每日词汇30个（Anki）② 每周2篇精读 ③ 每周3条书面短句 ④ 每周1次面试句式背诵+录音</span></div>
-        <div class="field-row"><span class="field-label">验收标准</span><span class="field-value" contenteditable="true">Anki截图≥30张/周；2篇精读笔记；3条仿写短句；1段自我介绍录音(≥1分钟)</span></div>
-      </div>
-      <div class="kanban-item">
-        <h4>A2 · 跨境运营/Shopify实战</h4>
-        <div class="field-row"><span class="field-label">当前现状</span><span class="field-value" contenteditable="true">在运营Shopify独立站，但缺系统运营方法论</span></div>
-        <div class="field-row"><span class="field-label">本周行动</span><span class="field-value" contenteditable="true">① 学习1个运营主题 ② 产出1篇实操笔记+应用到店铺</span></div>
-        <div class="field-row"><span class="field-label">验收标准</span><span class="field-value" contenteditable="true">1篇≥500字笔记+至少1项应用到店铺的实际改动截图</span></div>
-      </div>
-      <div class="kanban-item" style="grid-column:1/-1">
-        <h4>A3 · 求职岗位所需软硬技能</h4>
-        <div class="field-row"><span class="field-label">当前现状</span><span class="field-value" contenteditable="true">大专国贸背景，单证文员经验，目标跨境运营/单证类岗位</span></div>
-        <div class="field-row"><span class="field-label">本周行动</span><span class="field-value" contenteditable="true">① 拆解3个目标岗位JD ② 针对缺口项练习1项</span></div>
-        <div class="field-row"><span class="field-label">验收标准</span><span class="field-value" contenteditable="true">1份岗位能力差距分析表 + 1项技能练习产出</span></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ====== 求职项目看板 ====== -->
-<div class="page-content" id="page-job">
-  <div class="section-header"><h1>🧾 求职项目看板</h1><span class="tag">权重6分</span></div>
-  <blockquote>不追求疯狂海投。兼顾赚钱诉求与内心对传统职场的排斥。只投"有成长、不过度劳累"的岗位。每周最多投递2个优质岗位。</blockquote>
-
-  <div class="card dust">
-    <h3>B1 · 求职四象限行动</h3>
-    <div class="table-wrap"><table>
-      <thead><tr><th>子项</th><th>本周行动</th><th>验收标准</th></tr></thead>
-      <tbody>
-        <tr><td><strong>岗位调研</strong></td><td contenteditable="true">调研3个目标岗位</td><td>3份岗位分析</td></tr>
-        <tr><td><strong>简历迭代</strong></td><td contenteditable="true">优化简历V___版</td><td>简历PDF+修改记录</td></tr>
-        <tr><td><strong>投递行动</strong></td><td contenteditable="true">投递___个岗位</td><td>投递台账更新</td></tr>
-        <tr><td><strong>面试准备</strong></td><td contenteditable="true">1次自我介绍演练</td><td>录音/录像</td></tr>
-      </tbody>
-    </table></div>
-
-    <h4 style="margin-top:14px">B2 · 投递台账</h4>
-    <div class="table-wrap"><table>
-      <thead><tr><th>意向岗位</th><th>公司</th><th>投递日期</th><th>渠道</th><th>反馈结果</th><th>符合标准?</th><th>备注</th></tr></thead>
-      <tbody>
-        <tr><td contenteditable="true">_________</td><td contenteditable="true">_________</td><td contenteditable="true">__/__</td><td contenteditable="true">___</td><td contenteditable="true">⬜待回复</td><td contenteditable="true">✅/❌</td><td contenteditable="true">_________</td></tr>
-      </tbody>
-    </table></div>
-  </div>
-
-  <div class="guide-box">
-    <div class="guide-title">🤔 求职引导提问</div>
-    <ul>
-      <li><strong>这个岗位值得投入时间吗？</strong> → 看技能成长空间、是否过度加班、薪资对得起时间成本。</li>
-      <li><strong>它是消耗型岗位吗？</strong> → 纯重复无成长、销售强KPI、单休频繁加班→直接过滤。</li>
-      <li><strong>内心是否排斥到无法坚持？</strong> → 若是，不勉强投，优先跨境运营/单证文员类。</li>
-    </ul>
-  </div>
-</div>
-
-<!-- ====== Shopify副业看板 ====== -->
-<div class="page-content" id="page-shopify">
-  <div class="section-header"><h1>🛒 Shopify副业项目看板</h1><span class="tag">零广告预算</span></div>
-  <blockquote>AI宠物电子画POD，无广告投放。<strong>禁止规划任何付费广告/推广任务。</strong></blockquote>
-
-  <div class="card sage">
-    <h3>C1 · 允许的任务范围（仅限四类）</h3>
-    <div class="table-wrap"><table>
-      <thead><tr><th>任务类型</th><th>本周行动</th><th>验收标准</th><th>评估节点</th></tr></thead>
-      <tbody>
-        <tr><td><strong>Ins Reels产出</strong></td><td contenteditable="true">产出___条Reels</td><td>发布链接+数据截图</td><td>每周看播放量</td></tr>
-        <tr><td><strong>店铺页面优化</strong></td><td contenteditable="true">优化___个页面</td><td>优化前后对比</td><td>每月末看转化率</td></tr>
-        <tr><td><strong>产品优化</strong></td><td contenteditable="true">优化___个产品</td><td>修改记录</td><td>每周看加购数</td></tr>
-        <tr><td><strong>竞品观察</strong></td><td contenteditable="true">观察___个同类店铺</td><td>1页观察笔记</td><td>持续</td></tr>
-      </tbody>
-    </table></div>
-
-    <h4 style="margin-top:14px">C2 · 止损评估节点</h4>
-    <blockquote>核心问题：这件事做了能不能带来潜在订单/能力积累？如果不能就舍弃。</blockquote>
-    <div class="table-wrap"><table>
-      <thead><tr><th>评估时间</th><th>指标</th><th>当前值</th><th>判断</th><th>决策</th></tr></thead>
-      <tbody>
-        <tr><td>每月末</td><td>本月访客数</td><td contenteditable="true">___</td><td contenteditable="true">上升/持平/下降</td><td contenteditable="true">继续/调整/止损</td></tr>
-        <tr><td>每月末</td><td>本月加购数</td><td contenteditable="true">___</td><td contenteditable="true">___</td><td contenteditable="true">___</td></tr>
-        <tr><td>每月末</td><td>本月订单数</td><td contenteditable="true">___</td><td contenteditable="true">___</td><td contenteditable="true">___</td></tr>
-      </tbody>
-    </table></div>
-  </div>
-</div>
-
-<!-- ====== 周复盘 ====== -->
-<div class="page-content" id="page-review">
-  <div class="section-header"><h1>🔁 周复盘</h1><span class="tag">每周日 20:00 执行</span></div>
-  <blockquote>不做情绪评判，只看事实结果。</blockquote>
-
-  <div class="card sky">
-    <h3>📊 本周完成情况记录表</h3>
-    <div class="table-wrap"><table>
-      <thead><tr><th>本周核心任务</th><th>计划产出</th><th>实际产出</th><th>是否完成</th><th>未完成原因</th></tr></thead>
-      <tbody>
-        <tr><td contenteditable="true">_________</td><td contenteditable="true">_________</td><td contenteditable="true">_________</td><td contenteditable="true">✅/❌</td><td contenteditable="true">_________</td></tr>
-        <tr><td contenteditable="true">_________</td><td contenteditable="true">_________</td><td contenteditable="true">_________</td><td contenteditable="true">✅/❌</td><td contenteditable="true">_________</td></tr>
-        <tr><td contenteditable="true">_________</td><td contenteditable="true">_________</td><td contenteditable="true">_________</td><td contenteditable="true">✅/❌</td><td contenteditable="true">_________</td></tr>
-        <tr><td contenteditable="true">_________</td><td contenteditable="true">_________</td><td contenteditable="true">_________</td><td contenteditable="true">✅/❌</td><td contenteditable="true">_________</td></tr>
-      </tbody>
-    </table></div>
-  </div>
-
-  <div class="card sky">
-    <h3>🔍 三项目进展对比</h3>
-    <div class="table-wrap"><table>
-      <thead><tr><th>项目</th><th>本周投入</th><th>本周产出</th><th>投入产出比</th><th>评价</th></tr></thead>
-      <tbody>
-        <tr><td>技能提升</td><td contenteditable="true">___h</td><td contenteditable="true">_________</td><td contenteditable="true">高/中/低</td><td contenteditable="true">___</td></tr>
-        <tr><td>求职</td><td contenteditable="true">___h</td><td contenteditable="true">_________</td><td contenteditable="true">高/中/低</td><td contenteditable="true">___</td></tr>
-        <tr><td>Shopify副业</td><td contenteditable="true">___h</td><td contenteditable="true">_________</td><td contenteditable="true">高/中/低</td><td contenteditable="true">___</td></tr>
-      </tbody>
-    </table></div>
-  </div>
-
-  <div class="guide-box">
-    <div class="guide-title">🤔 周复盘引导提问</div>
-    <ul>
-      <li><strong>1. 本周哪些事情忙碌了但没有产出？</strong> → 下周直接砍掉。</li>
-      <li><strong>2. 三项中哪一项进展最好？哪一项消耗最多回报最少？</strong></li>
-      <li><strong>3. 下周要保留什么？要停止做什么？</strong></li>
-      <li><strong>4. 计划容错回顾：</strong>本周启用最低容错版几次？是否计划过满导致崩盘？</li>
-    </ul>
-  </div>
-</div>
-
-<!-- 底部帮助区域 -->
-<div class="help-area">
-  <strong>📖 调用说明</strong><br>
-  • 调用完整每日日程：<code>读取工作台，执行今日日程，今天是周一，状态正常</code><br>
-  • 状态差模式：<code>读取工作台，执行今日日程，今天周三，启用最低容错版</code><br>
-  • 周末模式：<code>读取工作台，执行今日日程，今天周六，周末聚会容错版</code><br>
-  • 单独打开学习页面：<code>打开英语学习页面，展示今日学习计划</code> / <code>打开理财学习页面，展示今日学习计划</code> / <code>打开锻炼身体页面，展示本周训练表</code><br>
-  • 打卡：<code>英语学习今日打卡完成</code> / <code>锻炼身体今日打卡完成</code> / <code>理财学习今日打卡完成</code>
-</div>
-
-<footer class="footer">最后更新：<span id="lastUpdate">____年__月__日</span> · 下次刷新：每日清晨</footer>
-
-</main>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-// ===== 数据 =====
-var STORAGE_KEY = 'yu_dashboard_data';
-var QUOTES = [["种一棵树最好的时间是十年前，其次是现在。", "The best time to plant a tree was ten years ago. The second best is now."], ["每天进步一点点，时间会给你答案。", "Improve by 1% every day, and time will reward you."], ["你不是在浪费时间，你是在积蓄力量。", "You are not wasting time. You are gathering strength."], ["慢一点没关系，别停下来就好。", "It's okay to be slow, just don't stop."], ["今天做的每一件小事，都是未来给现在的回信。", "Every little thing you do today is a letter from the future."], ["专注自己能控制的，放手自己不能控制的。", "Focus on what you can control, let go of what you can't."], ["你的价值不取决于你的产出，你本身就值得。", "Your worth is not defined by your output. You are enough."], ["累了就休息，但不是放弃。", "Rest when you're tired, but don't quit."], ["每一个优秀的人，都有一段沉默的时光。", "Every outstanding person has had a period of silent effort."], ["把'我不行'换成'我试试'。", "Replace 'I can't' with 'I'll try'."], ["你比自己想象的更强大。", "You are stronger than you think."], ["行动是治愈焦虑的良药。", "Action is the antidote to anxiety."], ["今天也是值得努力的一天。", "Today is another day worth fighting for."], ["梦想不会逃跑，逃跑的永远是自己。", "Dreams don't run away. It's always us who give up."]];
-var ENGLISH_DATA = {"mon": ["商务职场核心单词", "抄写记忆岗位、邮件、工作沟通相关词汇", "60min", "抄写记录+词汇笔记"], "tue": ["外企面试问答专项", "问答背诵+书面仿写回答", "60min", "仿写回答文档"], "wed": ["日常出国旅游交流句型", "场景对话，跟读+口头练习", "60min", "录音或笔记"], "thu": ["商务英文短文阅读", "阅读商务短文，摘抄实用句式", "60min", "摘抄笔记"], "fri": ["综合复盘", "整理本周错题、生词，简短英文小写作", "60min", "小作文+错题整理"], "sat": ["轻量听力&短句阅读", "巩固旧知识，不学大量新内容", "40min", "阅读标记"], "sun": ["口语输出练习", "自我介绍+情景模拟", "40min", "录音"]};
-var FINANCE_DATA = {"mon": ["基础理财概念科普", "学习收入、支出、资产、负债基本概念", "30min", "概念笔记"], "tue": ["个人家庭预算思维", "学习如何梳理个人现金流", "30min", "现金流梳理笔记"], "wed": ["副业财务思维", "副业成本、风险识别（贴合Shopify副业现状）", "30min", "副业财务笔记"], "thu": ["储蓄逻辑", "适合普通家庭的存钱思路", "30min", "储蓄策略笔记"], "fri": ["避坑学习", "避开常见理财骗局、错误观念", "30min", "避坑要点笔记"], "sat": ["案例阅读", "生活化理财案例，笔记总结要点", "30min", "案例笔记"], "sun": ["本周理财知识点复盘", "整理本周学习笔记", "30min", "周复盘笔记"]};
-var DAY_NAMES = ['周日','周一','周二','周三','周四','周五','周六'];
-var DAY_KEYS = ['sun','mon','tue','wed','thu','fri','sat'];
+var STORAGE_KEY='yu_v4_data';
+var QUOTES=[
+  ["种一棵树最好的时间是十年前，其次是现在。","The best time to plant a tree was ten years ago. The second best is now."],
+  ["每天进步一点点，时间会给你答案。","Improve by 1% every day, and time will reward you."],
+  ["你不是在浪费时间，你是在积蓄力量。","You are not wasting time. You are gathering strength."],
+  ["慢一点没关系，别停下来就好。","It's okay to be slow, just don't stop."],
+  ["今天做的每一件小事，都是未来给现在的回信。","Every little thing you do today is a letter from the future."],
+  ["专注自己能控制的，放手自己不能控制的。","Focus on what you can control, let go of what you can't."],
+  ["你的价值不取决于你的产出，你本身就值得。","Your worth is not defined by your output. You are enough."],
+  ["累了就休息，但不是放弃。","Rest when you're tired, but don't quit."],
+  ["每一个优秀的人，都有一段沉默的时光。","Every outstanding person has had a period of silent effort."],
+  ["把"我不行"换成"我试试"。","Replace 'I can't' with 'I'll try'."],
+  ["你比自己想象的更强大。","You are stronger than you think."],
+  ["行动是治愈焦虑的良药。","Action is the antidote to anxiety."],
+  ["今天也是值得努力的一天。","Today is another day worth fighting for."],
+  ["梦想不会逃跑，逃跑的永远是自己。","Dreams don't run away. It's always us who give up."]
+];
+var DEFAULT_START='2026-08-04';
+var CHECKIN_TYPES={english:{icon:'📗',name:'英语学习'},exercise:{icon:'🏃',name:'塑形训练'},finance:{icon:'💰',name:'理财教学'},shopify:{icon:'🛒',name:'Shopify'}};
 
 function getDefaultData(){
-  return {
-    checkins:{english:{today:false,todayDate:'',totalDays:0},exercise:{today:false,todayDate:'',totalDays:0},finance:{today:false,todayDate:'',totalDays:0},schedule:{today:false,todayDate:'',totalDays:0}},
-    quote:{cn:QUOTES[0][0],en:QUOTES[0][1],date:''},
-    english:{notes:'',wrongWords:''},
-    finance:{notes:'',knowledgeBase:''},
-    exercise:{log:'',totalDays:0},
-    currentMode:'full',currentDay:'mon',currentPage:'dashboard',
-    lastUpdate:new Date().toISOString()
-  };
+  return{checkins:{english:{today:false,todayDate:'',totalDays:0},exercise:{today:false,todayDate:'',totalDays:0},finance:{today:false,todayDate:'',totalDays:0},shopify:{today:false,todayDate:'',totalDays:0}},quote:{idx:0,date:''},notes:{exerciseBodyLog:'',englishWrongWords:'',financeSavedNotes:'',shopifyActionLog:''},startDate:DEFAULT_START,lastUpdate:new Date().toISOString()};
 }
-
-// ===== localStorage =====
-function loadData(){
-  try{var r=localStorage.getItem(STORAGE_KEY);if(r)return JSON.parse(r)}catch(e){}
-  return getDefaultData();
-}
+function loadData(){try{var r=localStorage.getItem(STORAGE_KEY);if(r)return JSON.parse(r)}catch(e){}return getDefaultData()}
+var D=loadData();
 
 function saveData(){
-  var d=loadData();
-  document.querySelectorAll('[contenteditable="true"]').forEach(function(e,i){d['editable_'+i]=e.innerHTML});
-  document.querySelectorAll('.check-box').forEach(function(e,i){d['check_'+i]=e.classList.contains('checked')});
-  d.currentMode=currentMode;d.currentDay=currentDay;d.currentPage=currentPage;
-  d.lastUpdate=new Date().toISOString();
-  // 保存打卡数据
-  ['english','exercise','finance','schedule'].forEach(function(t){
-    var ci=d.checkins[t];
-    d['ci_today_'+t]=ci.today;d['ci_date_'+t]=ci.todayDate;d['ci_total_'+t]=ci.totalDays;
-  });
-  localStorage.setItem(STORAGE_KEY,JSON.stringify(d));
+  var ex=document.getElementById('exBodyLog');if(ex)D.notes.exerciseBodyLog=ex.value;
+  var en=document.getElementById('enWrongWords');if(en)D.notes.englishWrongWords=en.value;
+  var fi=document.getElementById('fiSavedNotes');if(fi)D.notes.financeSavedNotes=fi.value;
+  var sh=document.getElementById('shActionLog');if(sh)D.notes.shopifyActionLog=sh.value;
+  D.lastUpdate=new Date().toISOString();localStorage.setItem(STORAGE_KEY,JSON.stringify(D));
   updateSaveStatus('已保存 '+new Date().toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'}));
 }
-
-function restoreData(){
-  var d=loadData();
-  // 恢复打卡
-  ['english','exercise','finance','schedule'].forEach(function(t){
-    if(d['ci_today_'+t]!==undefined)d.checkins[t].today=d['ci_today_'+t];
-    if(d['ci_date_'+t]!==undefined)d.checkins[t].todayDate=d['ci_date_'+t];
-    if(d['ci_total_'+t]!==undefined)d.checkins[t].totalDays=d['ci_total_'+t];
-  });
-  // 恢复可编辑内容
-  document.querySelectorAll('[contenteditable="true"]').forEach(function(e,i){if(d['editable_'+i]!==undefined)e.innerHTML=d['editable_'+i]});
-  document.querySelectorAll('.check-box').forEach(function(e,i){if(d['check_'+i])e.classList.add('checked')});
-  if(d.currentMode){currentMode=d.currentMode;selectModeUI(d.currentMode)}
-  if(d.currentDay){currentDay=d.currentDay;switchDayUI(d.currentDay)}
-  if(d.currentPage)switchPage(d.currentPage,true);
-  if(d.quote&&d.quote.cn){document.getElementById('quoteCn').textContent=d.quote.cn;document.getElementById('quoteEn').textContent=d.quote.en}
-  if(d.english){if(d.english.wrongWords)document.getElementById('engWrongWords').innerHTML=d.english.wrongWords}
-  if(d.finance){if(d.finance.knowledgeBase)document.getElementById('finKnowledgeBase').innerHTML=d.finance.knowledgeBase}
-  updateCheckinUI();
-}
-
-// ===== 每日重置检查 =====
-function resetDailyCheckins(){
-  var d=loadData(),today=new Date().toISOString().slice(0,10),changed=false;
-  ['english','exercise','finance','schedule'].forEach(function(t){
-    if(d.checkins[t].todayDate!==today){d.checkins[t].today=false;d.checkins[t].todayDate=today;changed=true}
-  });
-  if(changed)localStorage.setItem(STORAGE_KEY,JSON.stringify(d));
-}
-
-// ===== 页面切换 =====
-var currentPage='dashboard';
-function switchPage(name,silent){
-  currentPage=name;
-  document.querySelectorAll('.page-content').forEach(function(p){p.classList.remove('active')});
-  var target=document.getElementById('page-'+name);
-  if(target)target.classList.add('active');
-  document.querySelectorAll('.sidebar-nav a').forEach(function(a){
-    a.classList.remove('active');
-    if(a.getAttribute('data-page')===name)a.classList.add('active');
-  });
-  if(!silent)saveData();
-}
-
-// ===== 打卡 =====
-function checkin(type){
-  var d=loadData(),today=new Date().toISOString().slice(0,10);
-  var ci=d.checkins[type];
-  if(ci.todayDate===today&&ci.today){ci.today=false;ci.totalDays=Math.max(0,ci.totalDays-1);showToast('已取消 '+getCheckinLabel(type)+' 打卡')}
-  else{ci.today=true;ci.todayDate=today;ci.totalDays++;showToast('✅ '+getCheckinLabel(type)+' 打卡完成！累计 '+ci.totalDays+' 天')}
-  localStorage.setItem(STORAGE_KEY,JSON.stringify(d));
-  updateCheckinUI();
-}
-
-function getCheckinLabel(type){
-  var m={english:'英语学习',exercise:'锻炼身体',finance:'理财学习',schedule:'日程执行'};
-  return m[type]||type;
-}
-
-function updateCheckinUI(){
-  var d=loadData(),today=new Date().toISOString().slice(0,10);
-  ['english','exercise','finance','schedule'].forEach(function(t){
-    var ci=d.checkins[t],done=(ci.todayDate===today&&ci.today);
-    var card=document.getElementById('ci-'+t);
-    if(card){if(done)card.classList.add('done');else card.classList.remove('done')}
-    var st=document.getElementById('ci-status-'+t);
-    if(st)st.textContent=done?'✅ 已完成':'⬜ 未完成';
-    var tt=document.getElementById('ci-total-'+t);
-    if(tt)tt.textContent=ci.totalDays;
-    // 更新各页面累计天数
-    if(t==='english'){var e=document.getElementById('engTotalDays');if(e)e.textContent=ci.totalDays}
-    if(t==='exercise'){var e=document.getElementById('exTotalDays');if(e)e.textContent=ci.totalDays}
-    if(t==='finance'){var e=document.getElementById('finTotalDays');if(e)e.textContent=ci.totalDays}
-  });
-}
-
-// ===== 激励卡片 =====
-function refreshQuote(){
-  var q=QUOTES[Math.floor(Math.random()*QUOTES.length)];
-  document.getElementById('quoteCn').textContent=q[0];
-  document.getElementById('quoteEn').textContent=q[1];
-  var d=loadData();d.quote={cn:q[0],en:q[1],date:new Date().toISOString().slice(0,10)};
-  localStorage.setItem(STORAGE_KEY,JSON.stringify(d));
-}
-
-// ===== 生成今日日程 =====
-function generateTodaySchedule(){
-  var now=new Date(),dow=now.getDay(),dayKey=DAY_KEYS[dow],isWeekend=(dow===0||dow===6);
-  // 切换到schedule页面
-  switchPage('schedule');
-  // 选择模式
-  if(isWeekend)selectMode('weekend');else selectMode('full');
-  // 切换tab
-  switchDay(dayKey);
-  // 刷新激励卡片
-  refreshQuote();
-  // 同步英语学习内容
-  updateEnglishContent(dayKey);
-  // 同步理财学习内容
-  updateFinanceContent(dayKey);
-  // 更新仪表盘青蛙
-  updateDashboardFrogs(dayKey);
-  // toast
-  var dn=DAY_NAMES[dow];
-  showToast('✅ 今日日程已生成 — '+dn+' '+(isWeekend?'周末聚会版':'工作日完整版')+' | 激励卡片+英语+理财已同步');
-}
-
-function updateDashboardFrogs(dayKey){
-  var frogs = {"mon": ["Shopify竞品调研文档", "英语面试问答抄写5题", "求职岗位关键词整理"], "tue": ["Ins Reels完整脚本撰写", "简历迭代更新", "商务读写句型5组"], "wed": ["Reels半成品剪辑导出", "筛选5个优质岗位清单", "面试情景模拟练习"], "thu": ["宠物画新产品变体构思", "投递2个优质岗位", "Ins自然流量方法笔记"], "fri": ["本周数据复盘观察", "英语总复习整理", "周末任务规划"], "sat": ["英语单词复习+阅读", "下周Reels选题构思", ""], "sun": ["英语自我介绍口语练习", "标准周复盘执行", ""]};
-  var list = frogs[dayKey] || ['_________','_________','_________'];
-  var cards = document.querySelectorAll('#dashboardFrogs .frog-card');
-  cards.forEach(function(card, i){
-    var label = card.querySelector('.frog-label');
-    if(label && list[i]) label.textContent = list[i] || '_________';
-  });
-}
-
-function updateEnglishContent(dayKey){
-  var et = ENGLISH_DATA[dayKey] || ENGLISH_DATA['mon'];
-  var dn = DAY_NAMES[DAY_KEYS.indexOf(dayKey)];
-  var el = document.getElementById('engDayLabel'); if(el) el.textContent = dn;
-  el = document.getElementById('engTopic'); if(el) el.textContent = et[0];
-  el = document.getElementById('engTask'); if(el) el.textContent = et[1];
-  el = document.getElementById('engDuration'); if(el) el.textContent = et[2];
-  el = document.getElementById('engOutput'); if(el) el.textContent = et[3];
-}
-
-function updateFinanceContent(dayKey){
-  var ft = FINANCE_DATA[dayKey] || FINANCE_DATA['mon'];
-  var dn = DAY_NAMES[DAY_KEYS.indexOf(dayKey)];
-  var el = document.getElementById('finDayLabel'); if(el) el.textContent = dn;
-  el = document.getElementById('finTopic'); if(el) el.textContent = ft[0];
-  el = document.getElementById('finTask'); if(el) el.textContent = ft[1];
-  el = document.getElementById('finDuration'); if(el) el.textContent = ft[2];
-  el = document.getElementById('finOutput'); if(el) el.textContent = ft[3];
-}
-
-// ===== 日程tab切换 =====
-var currentDay='mon';
-function switchDay(day){
-  currentDay=day;
-  // 工作日tabs
-  ['mon','tue','wed','thu','fri'].forEach(function(d){
-    var panel=document.getElementById('panel-'+d);
-    if(panel)panel.style.display=(d===day?'block':'none');
-  });
-  // 周末tabs
-  ['sat','sun'].forEach(function(d){
-    var panel=document.getElementById('panel-'+d);
-    if(panel)panel.style.display=(d===day?'block':'none');
-  });
-  // 更新tab按钮
-  document.querySelectorAll('#weekdayTabs .day-tab, #weekendTabs .day-tab').forEach(function(b){
-    b.classList.remove('selected');
-    if(b.textContent.trim()===getDayLabel(day))b.classList.add('selected');
-  });
-  saveData();
-}
-
-function switchDayUI(day){
-  currentDay=day;
-  ['mon','tue','wed','thu','fri','sat','sun'].forEach(function(d){
-    var panel=document.getElementById('panel-'+d);
-    if(panel)panel.style.display=(d===day?'block':'none');
-  });
-  document.querySelectorAll('#weekdayTabs .day-tab, #weekendTabs .day-tab').forEach(function(b){
-    b.classList.remove('selected');
-    if(b.textContent.trim()===getDayLabel(day))b.classList.add('selected');
-  });
-}
-
-function getDayLabel(day){
-  var m={mon:'周一',tue:'周二',wed:'周三',thu:'周四',fri:'周五',sat:'周六',sun:'周日'};
-  return m[day]||'周一';
-}
-
-// ===== 模式切换 =====
-var currentMode='full';
-function selectMode(mode){
-  currentMode=mode;
-  document.getElementById('modeFull').style.display='none';
-  document.getElementById('modeMin').style.display='none';
-  document.getElementById('modeWeekend').style.display='none';
-  if(mode==='full'){document.getElementById('modeFull').style.display='';switchDay('mon')}
-  else if(mode==='min')document.getElementById('modeMin').style.display='';
-  else if(mode==='weekend'){document.getElementById('modeWeekend').style.display='';switchDay('sat')}
-  selectModeUI(mode);
-  saveData();
-  var labels={full:'工作日完整版',min:'最低容错版',weekend:'周末聚会版'};
-  showToast('已切换至：'+labels[mode]);
-}
-
-function selectModeUI(mode){
-  currentMode=mode;
-  document.querySelectorAll('.mode-btn').forEach(function(b,i){
-    b.classList.remove('selected');
-    if(i===0&&mode==='full')b.classList.add('selected');
-    if(i===1&&mode==='min')b.classList.add('selected');
-    if(i===2&&mode==='weekend')b.classList.add('selected');
-  });
-}
-
-// ===== 时钟 =====
-function updateClock(){
-  var n=new Date();
-  document.getElementById('clockTime').textContent=n.toLocaleTimeString('zh-CN',{hour12:false});
-  document.getElementById('clockDate').textContent=n.getFullYear()+'年'+(n.getMonth()+1)+'月'+n.getDate()+'日 星期'+DAY_NAMES[n.getDay()];
-}
-
-// ===== Toast =====
-function showToast(m){
-  var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');
-  clearTimeout(t._t);t._t=setTimeout(function(){t.classList.remove('show')},2500);
-}
-
-// ===== 保存状态 =====
+var saveT;function autoSave(){clearTimeout(saveT);saveT=setTimeout(saveData,1200);updateSaveStatus('编辑中...')}
 function updateSaveStatus(m){var e=document.getElementById('saveStatus');if(e)e.textContent=m}
 
-// ===== 自动保存 =====
-var saveTimeout;
-document.addEventListener('input',function(e){if(e.target.isContentEditable){clearTimeout(saveTimeout);saveTimeout=setTimeout(saveData,1500);updateSaveStatus('编辑中...')}});
-document.addEventListener('click',function(e){if(e.target.classList.contains('check-box')){clearTimeout(saveTimeout);saveTimeout=setTimeout(saveData,1500)}});
+function todayStr(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function daysSince(){var s=D.startDate||DEFAULT_START;var start=new Date(s+'T00:00:00');var now=new Date(todayStr()+'T00:00:00');return Math.max(0,Math.floor((now-start)/86400000))}
 
-// ===== 导出导入 =====
-function exportData(){
-  var d=loadData();
-  document.querySelectorAll('[contenteditable="true"]').forEach(function(e,i){d['editable_'+i]=e.innerHTML});
-  d.currentMode=currentMode;d.currentDay=currentDay;d.currentPage=currentPage;
-  d.lastUpdate=new Date().toISOString();d.exportDate=new Date().toLocaleString('zh-CN');
-  ['english','exercise','finance','schedule'].forEach(function(t){
-    d['ci_today_'+t]=d.checkins[t].today;d['ci_date_'+t]=d.checkins[t].todayDate;d['ci_total_'+t]=d.checkins[t].totalDays;
-  });
-  var b=new Blob([JSON.stringify(d,null,2)],{type:'application/json'});
-  var u=URL.createObjectURL(b);var a=document.createElement('a');
-  a.href=u;a.download='Yu工作台备份_'+new Date().toISOString().slice(0,10)+'.json';a.click();
-  URL.revokeObjectURL(u);showToast('📤 数据已导出');
+function resetDailyCheckins(){var today=todayStr(),c=false;for(var k in D.checkins){if(D.checkins[k].todayDate!==today){D.checkins[k].today=false;D.checkins[k].todayDate='';c=true}}if(c)saveData()}
+
+function doCheckin(type){
+  if(D.checkins[type].today){showToast('今日已打卡 ✓');return}
+  D.checkins[type].today=true;D.checkins[type].todayDate=todayStr();D.checkins[type].totalDays++;
+  saveData();renderCheckins();updateCheckinBtns();
+  showToast(CHECKIN_TYPES[type].icon+' '+CHECKIN_TYPES[type].name+' 打卡完成！累计'+D.checkins[type].totalDays+'天');
+}
+function updateCheckinBtns(){
+  var map={exercise:'exCheckinBtn',english:'enCheckinBtn',finance:'fiCheckinBtn',shopify:'shCheckinBtn'};
+  for(var k in map){var btn=document.getElementById(map[k]);if(!btn)continue;
+    if(D.checkins[k].today){btn.classList.add('done');btn.innerHTML='✅ 今日已完成';btn.disabled=true}
+    else{btn.classList.remove('done');btn.innerHTML='✅ '+(k==='exercise'?'训练':k==='english'?'学习':k==='finance'?'学习':'学习')+'打卡';btn.disabled=false}
+  }
+}
+function renderCheckins(){
+  var grid=document.getElementById('checkinGrid');if(!grid)return;var html='';
+  for(var k in CHECKIN_TYPES){var c=D.checkins[k],info=CHECKIN_TYPES[k];
+    html+='<div class="checkin-card'+(c.today?' done':'')+'" onclick="doCheckin(\''+k+'\')">';
+    html+='<div class="checkin-icon">'+info.icon+'</div><div class="checkin-name">'+info.name+'</div>';
+    html+='<div class="checkin-status">'+(c.today?'✅ 已完成':'⬜ 未打卡')+'</div>';
+    html+='<div class="checkin-total">'+c.totalDays+'</div><div class="checkin-total-label">累计天数</div></div>';
+  }
+  grid.innerHTML=html;
 }
 
-function importData(ev){
-  var f=ev.target.files[0];if(!f)return;
-  var r=new FileReader();
-  r.onload=function(e){try{var d=JSON.parse(e.target.result);localStorage.setItem(STORAGE_KEY,JSON.stringify(d));restoreData();showToast('📥 数据已导入并恢复')}catch(err){showToast('❌ 导入失败')}};
-  r.readAsText(f);ev.target.value='';
+function refreshQuote(){var idx=Math.floor(Math.random()*QUOTES.length);D.quote.idx=idx;D.quote.date=todayStr();document.getElementById('quoteCn').textContent='"'+QUOTES[idx][0]+'"';document.getElementById('quoteEn').textContent='"'+QUOTES[idx][1]+'"';saveData()}
+function loadQuote(){if(D.quote.date!==todayStr())refreshQuote();else{var idx=D.quote.idx||0;document.getElementById('quoteCn').textContent='"'+QUOTES[idx][0]+'"';document.getElementById('quoteEn').textContent='"'+QUOTES[idx][1]+'"'}}
+
+function updateClock(){
+  var now=new Date(),h=String(now.getHours()).padStart(2,'0'),m=String(now.getMinutes()).padStart(2,'0'),s=String(now.getSeconds()).padStart(2,'0');
+  var el=document.getElementById('clock');if(el)el.textContent=h+':'+m+':'+s;
+  var days=['周日','周一','周二','周三','周四','周五','周六'];
+  var dt=now.getFullYear()+'年'+(now.getMonth()+1)+'月'+now.getDate()+'日 '+days[now.getDay()];
+  var dtEl=document.getElementById('clockDate');if(dtEl)dtEl.textContent=dt;
+  var hr=now.getHours(),g='';
+  if(hr<11)g='早安，美好的一天从运动开始 🌅';else if(hr<14)g='午安，下午是黄金工作时段 💪';else if(hr<18)g='继续加油，专注产出 📚';else if(hr<22)g='晚间学习时段，温故知新 🌙';else g='该休息了，明天继续 💤';
+  var gEl=document.getElementById('clockGreeting');if(gEl)gEl.textContent=g;
 }
 
-// ===== 侧边栏 =====
-function toggleSidebar(){
-  document.getElementById('sidebar').classList.toggle('open');
-}
-function closeSidebar(){
-  document.getElementById('sidebar').classList.remove('open');
+function switchPage(name){
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active')});
+  var page=document.getElementById('page-'+name);if(page)page.classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active')});
+  var nav=document.querySelectorAll('.nav-item'),map={home:0,exercise:1,english:2,finance:3,shopify:4};
+  if(nav[map[name]])nav[map[name]].classList.add('active');
+  if(name==='exercise')renderExercise();if(name==='english')renderEnglish();if(name==='finance')renderFinance();if(name==='shopify')renderShopify();if(name==='home')renderCheckins();
+  closeSidebar();window.scrollTo(0,0);
 }
 
-// ===== 初始化 =====
+function progressHTML(p,l){return '<div class="progress-label"><span>'+l+'</span><span>'+p+'%</span></div><div class="progress-bar"><div class="progress-fill" style="width:'+p+'%"></div></div>'}
+
+function getExerciseStage(){var d=daysSince();if(d<28)return{stage:1,week:Math.floor(d/7),day:d%7};if(d<56)return{stage:2,week:Math.floor((d-28)/7),day:(d-28)%7};return{stage:3,week:Math.floor((d-56)/7),day:(d-56)%7}}
+function renderExercise(){
+  if(typeof exerciseData==='undefined')return;
+  var info=getExerciseStage(),stage=exerciseData['stage'+info.stage];
+  if(!stage||!stage.weeks||!stage.weeks[info.week]||!stage.weeks[info.week].days||!stage.weeks[info.week].days[info.day]){document.getElementById('exContent').innerHTML='<p class="muted">暂无数据</p>';return}
+  var day=stage.weeks[info.week].days[info.day],gw=info.stage===1?info.week+1:info.stage===2?info.week+5:info.week+9;
+  document.getElementById('exStageBadge').textContent='🏋️ '+stage.name+' · '+stage.range+' · 第'+gw+'周';
+  document.getElementById('exProgress').innerHTML=progressHTML(Math.round((info.day+1)/28*100),'阶段进度：第'+(info.day+1)+'天/28天');
+  var h='<div class="card sage"><h3>'+day.dayOfWeek+' · '+day.focus+'</h3>';
+  if(day.warmup)h+='<div class="workout-section"><h4>🔥 热身</h4><div class="content-text">'+day.warmup+'</div></div>';
+  if(day.main&&day.main.length){h+='<div class="workout-section"><h4>💪 力量训练</h4>';day.main.forEach(function(m){h+='<div class="exercise-move"><span class="exercise-name">'+m.name+'</span><span class="exercise-weight">'+m.weight+'</span><span class="exercise-sets">'+m.sets+'×'+m.reps+'</span></div>';if(m.notes)h+='<div style="font-size:.72rem;color:var(--text-muted);padding:2px 0 4px">'+m.notes+'</div>'});h+='</div>'}
+  if(day.cardio)h+='<div class="workout-section"><h4>🏃 有氧</h4><div class="content-text">'+day.cardio+'</div></div>';
+  if(day.core)h+='<div class="workout-section"><h4>🎯 核心腹部</h4><div class="content-text">'+day.core+'</div></div>';
+  if(day.stretch)h+='<div class="workout-section"><h4>🧘 拉伸放松</h4><div class="content-text">'+day.stretch+'</div></div>';
+  if(day.diet){h+='<div class="workout-section"><h4>🥗 今日饮食建议</h4><div class="content-text">'+day.diet+'</div>';if(day.dietNote)h+='<div style="font-size:.72rem;color:var(--text-muted);margin-top:4px">'+day.dietNote+'</div>';h+='</div>'}
+  h+='</div>';
+  h+='<div class="card"><h4>📅 本周训练排布</h4><div class="week-preview">';
+  var wd=stage.weeks[info.week];
+  if(wd&&wd.days)wd.days.forEach(function(w,i){h+='<div class="week-day'+(i===info.day?' today':'')+'"><div class="week-day-name">'+w.dayOfWeek+'</div><div class="week-day-focus">'+w.focus+'</div></div>'});
+  h+='</div></div>';
+  document.getElementById('exContent').innerHTML=h;
+}
+
+function getEnglishStage(){var d=daysSince(),s=Math.min(6,Math.floor(d/30)+1);return{stage:s,dayInStage:d%30}}
+function renderEnglish(){
+  if(typeof englishData==='undefined')return;
+  var info=getEnglishStage(),stage=englishData['stage'+info.stage];
+  if(!stage||!stage.days||!stage.days[info.dayInStage]){document.getElementById('enContent').innerHTML='<p class="muted">暂无数据</p>';return}
+  var day=stage.days[info.dayInStage];
+  document.getElementById('enStageBadge').textContent='📚 '+stage.name+' · 第'+(info.dayInStage+1)+'天/30天';
+  document.getElementById('enProgress').innerHTML=progressHTML(Math.round((info.dayInStage+1)/30*100),'阶段进度');
+  var h='';
+  if(day.words&&day.words.length){h+='<div class="card rose"><h3>📖 今日单词（15个）</h3><div class="word-grid">';day.words.forEach(function(w){h+='<div class="word-item"><div class="word-head"><span class="word-word">'+w.word+'</span><span class="word-phonetic">'+w.phonetic+'</span></div><div class="word-meaning">'+w.meaning+'</div><div class="word-example">'+w.example+'</div></div>'});h+='</div></div>'}
+  if(day.grammar){var g=day.grammar;h+='<div class="card rose"><h3>📐 语法知识点</h3><div class="content-block"><h4>'+g.topic+'</h4><div class="content-text">'+g.explanation+'</div></div>';if(g.exercise)h+='<div class="content-block"><h4>练习</h4><div class="content-text">'+g.exercise+'</div><div style="margin-top:6px;font-size:.78rem;color:var(--text-muted)">答案：'+(g.answer||'')+'</div></div>';h+='</div>'}
+  if(day.sentences&&day.sentences.length){h+='<div class="card rose"><h3>🗣️ 跟读短句（10句）</h3><ul class="sentence-list">';day.sentences.forEach(function(s){h+='<li>'+s+'</li>'});h+='</ul></div>'}
+  if(info.dayInStage===29)h+='<div class="card rose" style="border-color:var(--rose)"><h3>📊 月末学习复盘</h3><div class="content-text">本月学习即将结束！请整理：本月掌握的单词数、常错语法点、最难掌握的句型，写下月度学习总结。</div></div>';
+  document.getElementById('enContent').innerHTML=h;
+}
+
+function getFinanceStage(){var d=daysSince(),tw=Math.floor(d/7);if(tw<4)return{stage:1,week:tw,day:d%7};if(tw<12)return{stage:2,week:tw-4,day:d%7};return{stage:3,week:tw-12,day:d%7}}
+function renderFinance(){
+  if(typeof financeData==='undefined')return;
+  var info=getFinanceStage(),stage=financeData['stage'+info.stage];
+  if(!stage||!stage.weeks||!stage.weeks[info.week]||!stage.weeks[info.week].days||!stage.weeks[info.week].days[info.day]){document.getElementById('fiContent').innerHTML='<p class="muted">暂无数据</p>';return}
+  var day=stage.weeks[info.week].days[info.day],wt=stage.weeks[info.week].title||'';
+  document.getElementById('fiStageBadge').textContent='💰 '+stage.name+' · 第'+(info.week+1)+'周';
+  var st=info.stage===1?28:info.stage===2?56:84,dis=info.week*7+info.day;
+  document.getElementById('fiProgress').innerHTML=progressHTML(Math.round((dis+1)/st*100),'阶段进度：第'+(dis+1)+'天/'+st+'天');
+  var h='<div class="card gold"><h3>'+day.title+'</h3>';if(wt)h+='<div class="tag" style="margin-bottom:10px">'+wt+'</div>';h+='<div class="content-text" style="line-height:1.8">'+day.content+'</div></div>';
+  if(day.questions&&day.questions.length){h+='<div class="card gold"><h4>🤔 课后思考题</h4><ul class="sentence-list">';day.questions.forEach(function(q){h+='<li>'+q+'</li>'});h+='</ul></div>'}
+  document.getElementById('fiContent').innerHTML=h;
+}
+
+function getShopifyStage(){var d=daysSince(),tw=Math.floor(d/7);if(tw<2)return{stage:1,week:tw,day:d%7};if(tw<6)return{stage:2,week:tw-2,day:d%7};return{stage:3,week:tw-6,day:d%7}}
+function renderShopify(){
+  if(typeof shopifyData==='undefined')return;
+  var info=getShopifyStage(),stage=shopifyData['stage'+info.stage];
+  if(!stage||!stage.weeks||!stage.weeks[info.week]||!stage.weeks[info.week].days||!stage.weeks[info.week].days[info.day]){document.getElementById('shContent').innerHTML='<p class="muted">暂无数据</p>';return}
+  var day=stage.weeks[info.week].days[info.day],wt=stage.weeks[info.week].title||'';
+  document.getElementById('shStageBadge').textContent='🛒 '+stage.name+' · 第'+(info.week+1)+'周';
+  var st=info.stage===1?14:info.stage===2?28:56,dis=info.week*7+info.day;
+  document.getElementById('shProgress').innerHTML=progressHTML(Math.round((dis+1)/st*100),'阶段进度：第'+(dis+1)+'天/'+st+'天');
+  var h='<div class="card sky"><h3>'+day.title+'</h3>';if(wt)h+='<div class="tag" style="margin-bottom:10px;background:var(--sky-bg);color:var(--sky)">'+wt+'</div>';if(day.content)h+='<div class="content-text" style="line-height:1.8">'+day.content+'</div></div>';
+  if(day.task){h+='<div class="card sky"><h4>🔧 今日落地任务</h4><div class="content-text">'+day.task+'</div>';if(day.taskOutput)h+='<div style="margin-top:8px;font-size:.78rem;color:var(--sky);font-weight:600">📋 产出标准：'+day.taskOutput+'</div>';h+='</div>'}
+  document.getElementById('shContent').innerHTML=h;
+}
+
+function refreshToday(){loadQuote();renderCheckins();updateCheckinBtns();renderExercise();renderEnglish();renderFinance();renderShopify();showToast('✅ 今日内容已刷新')}
+
+function exportData(){saveData();var b=new Blob([JSON.stringify(D,null,2)],{type:'application/json'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download='Yu工作台备份_'+todayStr()+'.json';a.click();URL.revokeObjectURL(u);showToast('📤 数据已导出')}
+function importData(e){var f=e.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(ev){try{D=JSON.parse(ev.target.result);localStorage.setItem(STORAGE_KEY,JSON.stringify(D));location.reload()}catch(err){showToast('❌ 导入失败')}};r.readAsText(f);e.target.value=''}
+
+function showToast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(function(){t.classList.remove('show')},2500)}
+function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlay').classList.toggle('show')}
+function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('overlay').classList.remove('show')}
+
 function init(){
-  resetDailyCheckins();
-  restoreData();
+  resetDailyCheckins();loadQuote();renderCheckins();updateCheckinBtns();
+  var ex=document.getElementById('exBodyLog');if(ex&&D.notes.exerciseBodyLog)ex.value=D.notes.exerciseBodyLog;
+  var en=document.getElementById('enWrongWords');if(en&&D.notes.englishWrongWords)en.value=D.notes.englishWrongWords;
+  var fi=document.getElementById('fiSavedNotes');if(fi&&D.notes.financeSavedNotes)fi.value=D.notes.financeSavedNotes;
+  var sh=document.getElementById('shActionLog');if(sh&&D.notes.shopifyActionLog)sh.value=D.notes.shopifyActionLog;
   updateClock();setInterval(updateClock,1000);
-  // 更新最后更新日期
-  var lu=loadData().lastUpdate;
-  if(lu){var ld=new Date(lu);document.getElementById('lastUpdate').textContent=ld.getFullYear()+'年'+(ld.getMonth()+1)+'月'+ld.getDate()+'日 '+ld.getHours().toString().padStart(2,'0')+':'+ld.getMinutes().toString().padStart(2,'0')}
+  document.querySelectorAll('.note-area').forEach(function(el){el.addEventListener('input',autoSave)});
   updateSaveStatus('就绪');
-  // 点击侧边栏外部关闭
-  document.addEventListener('click',function(e){var sb=document.getElementById('sidebar');if(sb.classList.contains('open')&&!sb.contains(e.target)&&e.target.className!=='menu-btn')closeSidebar()});
 }
-
 document.addEventListener('DOMContentLoaded',init);
 setInterval(saveData,30000);
 window.addEventListener('beforeunload',saveData);
 window.addEventListener('pagehide',saveData);
 
-// 全局暴露
-window.saveAllData=saveData;window.exportData=exportData;window.importData=importData;
-window.generateTodaySchedule=generateTodaySchedule;window.selectMode=selectMode;
-window.switchDay=switchDay;window.switchPage=switchPage;window.checkin=checkin;
-window.toggleSidebar=toggleSidebar;window.closeSidebar=closeSidebar;
-
-// PWA Manifest
-(function(){
-  var m={"name":"Yuの工作台","short_name":"Yu工作台","description":"莫兰迪粉调 · 个人成长工作台","start_url":".","scope":".","display":"standalone","orientation":"any","background_color":"#F5F0EB","theme_color":"#F5F0EB"};
-  var blob=new Blob([JSON.stringify(m)],{type:'application/json'});
-  var link=document.createElement('link');link.rel='manifest';link.href=URL.createObjectURL(blob);
-  document.head.appendChild(link);
-})();
-
-// Service Worker
 if('serviceWorker' in navigator){
-  var swCode="self.addEventListener('install',function(e){e.waitUntil(caches.open('yu-v2').then(function(c){return c.addAll(['.'])}));self.skipWaiting()});self.addEventListener('activate',function(e){e.waitUntil(caches.keys().then(function(k){return Promise.all(k.filter(function(x){return x!=='yu-v2'}).map(function(x){return caches.delete(x)}))}));self.clients.claim()});self.addEventListener('fetch',function(e){if(e.request.method!=='GET')return;e.respondWith(caches.match(e.request).then(function(c){return c||fetch(e.request).then(function(r){if(r&&r.status===200){var rc=r.clone();caches.open('yu-v2').then(function(ca){ca.put(e.request,rc)})}return r}).catch(function(){return c})}))});";
-  var swBlob=new Blob([swCode],{type:'application/javascript'});
-  navigator.serviceWorker.register(URL.createObjectURL(swBlob)).catch(function(){});
+  var swCode="var C='yu-v4-cache';self.addEventListener('install',function(e){e.waitUntil(caches.open(C).then(function(c){return c.addAll(['.','index.html','data-exercise.js','data-english.js','data-finance.js','data-shopify.js'])}));self.skipWaiting()});self.addEventListener('activate',function(e){e.waitUntil(caches.keys().then(function(k){return Promise.all(k.filter(function(x){return x!==C}).map(function(x){return caches.delete(x)}))}));self.clients.claim()});self.addEventListener('fetch',function(e){if(e.request.method!=='GET')return;e.respondWith(caches.match(e.request).then(function(c){return c||fetch(e.request).then(function(r){if(r&&r.status===200){var rc=r.clone();caches.open(C).then(function(ca){ca.put(e.request,rc)})}return r}).catch(function(){return c})}))});";
+  try{navigator.serviceWorker.register(URL.createObjectURL(new Blob([swCode],{type:'application/javascript'}))).catch(function(){})}catch(e){}
 }
+(function(){var m={"name":"Yuの工作台","short_name":"Yu工作台","start_url":".","scope":".","display":"standalone","background_color":"#F5F0EB","theme_color":"#F5F0EB","icons":[]};var b=new Blob([JSON.stringify(m)],{type:'application/json'});var l=document.createElement('link');l.rel='manifest';l.href=URL.createObjectURL(b);document.head.appendChild(l)})();
 </script>
 </body>
 </html>
